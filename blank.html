@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>警情统计</title>
+    <link rel="stylesheet" href="./vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="./vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./css/table.css">
+    <link rel="stylesheet" href="./css/1.css">
+</head>
+
+<body class="sidebar-fixed header-fixed">
+    <div class="page-wrapper">
+        <nav class="navbar page-header">
+            <p style="position: absolute;top: 2px;left: 17px; color: aliceblue; font: 16px Microsoft YaHei;">
+                <i class="icon icon-user"></i> 用户名：<span id="username"></span>
+            </p>
+            
+            <a class="navbar-brand" href="#" id="exit">
+            
+                <i class="icon icon-info"></i> 退出登录
+            </a>
+
+            <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">
+                <i class="fa fa-bars"></i>
+            </a>
+            <a href="#">
+                <img src="./imgs/jing.png" alt="logo" style="width: 45px;height: 45px;    margin-bottom: 14px;">
+            </a>
+            <h1 style="color: aliceblue;font-weight: 700;" class="xiongan">雄安新区公安局情报合成作战中心重复报警数据分析平台</h1>
+            <ul class="navbar-nav ml-auto">
+                <div class="search d7">
+
+                    <input type="text" id="sousuo" >
+                    <button type="submit" id="bei"></button>
+
+                </div>
+            </ul>
+
+
+        </nav>
+
+        <div class="main-container">
+            <div class="sidebar">
+                <nav class="sidebar-nav">
+                    <ul class="nav">
+                        <!-- <li class="nav-title">Navigation</li> -->
+
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link ">
+                                <i class="icon icon-speedometer"></i> 警情监测
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="forms.html" class="nav-link">
+                                <i class="icon icon-puzzle"></i> 案件分析
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-item">
+                                                                    <a href="tables.html" class="nav-link ">
+                                                                        <i class="icon icon-grid"></i> 数据检索
+                                                                    </a>
+                                                                </li> -->
+                        <li class="nav-item">
+                            <a href="chartjs.html" class="nav-link ">
+                                <i class="icon icon-pin"></i> 警情图谱
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="alerts.html" class="nav-link">
+                                <i class="icon icon-film"></i> 警情分析
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="blank.html" class="nav-link active">
+                                <i class="icon icon-docs"></i> 警情统计
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="settings.html" class="nav-link ">
+                                <i class="icon icon-calculator"></i> 数据导出
+                            </a>
+                        </li>
+                        <li class="nav-item nav-dropdown">
+                            <a href="#" class="nav-link nav-dropdown-toggle ">
+                                <i class="icon icon-umbrella"></i>后台管理<i class="fa fa-caret-left"></i>
+                            </a>
+
+                            <ul class="nav-dropdown-items">
+                                <li class="nav-item">
+                                    <a href="cards.html" class="nav-link  ">
+                                        <i class="icon icon-umbrella"></i>用户管理
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="buttons.html" class="nav-link ">
+                                        <i class="icon icon-umbrella"></i>用户日志
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="tabs.html" class="nav-link ">
+                                        <i class="icon icon-umbrella"></i>搜索记录
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="register.html" class="nav-link">
+                                        <i class="icon icon-umbrella"></i>导出记录
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="content">
+                <div class="row">
+                    <div class="col-12 dl">
+                        <p style="float: left;">警情统计</p>
+                        <div class="r">
+                            <button type="button" style="background: #10a7b3;" class="layui-btn" id="test3"><i
+                                    class="layui-icon"></i>上传文件</button>
+                        </div>
+                        <div class="col-md-12" id="tishi-1">
+                            <!-- <img class="img-responsive center-block" src="images/3_classify.png"> -->
+                            <div id="loading-1" style="height: 54%; ">
+                                <img src="./imgs/loading.gif" style="width: 8%; height: 69%; ">
+                                <div style=" margin-top: 1.4%;">
+                                    <span style="font-family: 微软雅黑; color: aliceblue; font-size: 18px;">数据统计中，请稍后...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 dl">
+                        <span class="q1" style="float: left;"></span>
+                        <p style="float: left;">统计类型选择</p>
+                        <div class="case_box">
+                            <div class="category ">
+                                <ul>
+                                    <li>时刻</li>
+                                    <li>日</li>
+                                    <li>详情类</li>
+                                    <li>分类</li>
+                                    <li class="active">基础表</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 ql1">
+                        <div class="case_box">
+                            <div class="contents ">
+                                <!-- 时刻 -->
+                                <div class=" cont ">
+                                    <div class="row">
+                                    <div class="col-6" style=" height: 423px;">
+                                            <div class="d-1">
+                                                <span class="q1" style="float: left;"></span>
+                                                <p style="float: left;margin-left: 5px;font-size: 16px;">派出所管辖</p>
+                                            </div>
+                                            <table class="layui-hide" id="testfour"></table>
+                                
+                                
+                                
+                                        </div>
+                                    <div class="col-6" style=" height: 423px;">
+                                            <div class="d-1">
+                                                <span class="q1" style="float: left;"></span>
+                                                <p style="float: left;margin-left: 5px;font-size: 16px;">警情分类</p>
+                                                <div class="pull-right" style="float: right;    margin-top: 10px;">
+                                
+                                                    <input style="margin-left: 16px;" type="checkbox" id="" name="dm" value="八类危害严重刑事犯罪">八类危害严重刑事犯罪
+                                
+                                                    <input style="margin-left: 16px;" type="checkbox" id="" name="dm" value="侵财犯罪">侵财犯罪
+                                
+                                                    <input style="margin-left: 16px;" type="checkbox" id="" name="dm" value="秩序类">秩序类
+                                
+                                                    <input style="margin-left: 16px;" type="checkbox" id="" name="dm" value="其他">其他
+                                
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <table class="layui-hide" id="testfive"></table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 lkj">
+                                            <div class="d-1">
+                                                <span class="q1" style="float: left;"></span>
+                                                <p style="float: left;margin-left: 5px;font-size: 16px; color: aliceblue;">
+                                                    日期选择</p>
+                                            </div>
+                                            <div class="div33">
+                                                <label class="layui-form-label">开始时间</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" class="layui-input" id="test77" placeholder="请选择日期">
+                                                </div>
+                                            </div>
+                                            <div class="div33">
+                                                <label class="layui-form-label">结束时间</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" class="layui-input" id="test88" placeholder="请选择日期">
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="col-6 lkj">
+                                            <div class="d-1">
+                                                <span class="q1" style="float: left;"></span>
+                                                <p style="float: left;margin-left: 5px;font-size: 16px; color: aliceblue;">
+                                                    分类统计</p>
+                                            </div>
+                                            <div class="row" id="tjRadios">
+                                                <div class="col-md-3 col-sm-3" style="text-align: right;">统计:</div>
+                                
+                                                <div class="col-md-3 col-sm-3">
+                                                    <input type="checkbox" id="" name="to" value="刑事">
+                                                    刑事发案
+                                                </div>
+                                                <div class="col-md-3 col-sm-3">
+                                                    <input type="checkbox" id="" name="to" value="受理">
+                                                    受理总数
+                                                </div>
+                                                <div class="col-md-3 col-sm-3">
+                                                    <input type="checkbox" id="" name="to" value="行政">
+                                                    行政发案
+                                                </div>
+                                            </div>
+                                
+                                
+                                        </div>
+                                        <div class="ji">
+                                            <input type="hidden" id="exportType6" name="exportType" />
+                                            <input type="hidden" id="exportTitle6" name="exportTitle" />
+                                            <input type="hidden" id="exportValue6" name="exportValue" />
+                                        
+                                            <button id="cound-3">计算</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 日 -->
+                                <div class="cont">
+                                    <div class="row">
+                                        <div class="col-6" style=" height: 423px;">
+                                            <div class="d-1">
+                                                <span class="q1" style="float: left;"></span>
+                                                <p style="float: left;margin-left: 5px;font-size: 16px;">派出所管辖</p>
+                                            </div>
+                                            <table class="layui-hide" id="test8"></table>
+                                    
+                                    
+                                    
+                                        </div>
+                                        <div class="col-6" style=" height: 423px;">
+                                            <div class="d-1">
+                                                <span class="q1" style="float: left;"></span>
+                                                <p style="float: left;margin-left: 5px;font-size: 16px;">警情分类</p>
+                                                <div class="pull-right" style="float: right;    margin-top: 10px;">
+                                    
+                                                    <input style="margin-left: 16px;" type="checkbox" id="" name="dw" value="八类危害严重刑事犯罪">八类危害严重刑事犯罪
+                                    
+                                                    <input style="margin-left: 16px;" type="checkbox" id="" name="dw" value="侵财犯罪">侵财犯罪
+                                    
+                                                    <input style="margin-left: 16px;" type="checkbox" id="" name="dw" value="秩序类">秩序类
+                                    
+                                                    <input style="margin-left: 16px;" type="checkbox" id="" name="dw" value="其他">其他
+                                    
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <table class="layui-hide" id="test9"></table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 lkj">
+                                            <div class="d-1">
+                                                <span class="q1" style="float: left;"></span>
+                                                <p style="float: left;margin-left: 5px;font-size: 16px; color: aliceblue;">
+                                                    日期选择</p>
+                                            </div>
+                                            <div class="div33">
+                                                <label class="layui-form-label">开始时间</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" class="layui-input" id="test1515" placeholder="请选择日期">
+                                                </div>
+                                            </div>
+                                            <div class="div33">
+                                                <label class="layui-form-label">结束时间</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" class="layui-input" id="test1616" placeholder="请选择日期">
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="col-6 lkj">
+                                            <div class="d-1">
+                                                <span class="q1" style="float: left;"></span>
+                                                <p style="float: left;margin-left: 5px;font-size: 16px; color: aliceblue;">
+                                                    分类统计</p>
+                                            </div>
+                                            <div class="row"  id="tjRadiod">
+                                                <div class="col-md-3 col-sm-3" style="text-align: right;">统计:</div>
+                                    
+                                                <div class="col-md-3 col-sm-3">
+                                                    <input type="checkbox" id="" name="tq" value="刑事">
+                                                    刑事发案
+                                                </div>
+                                                <div class="col-md-3 col-sm-3">
+                                                    <input type="checkbox" id="" name="tq" value="受理">
+                                                    受理总数
+                                                </div>
+                                                <div class="col-md-3 col-sm-3">
+                                                    <input type="checkbox" id="" name="tq" value="行政">
+                                                    行政发案
+                                                </div>
+                                            </div>
+                                            
+                                    
+                                        </div>
+                                        <div class="ji">
+                                            <input type="hidden" id="exportType9" name="exportType" />
+                                            <input type="hidden" id="exportTitle9" name="exportTitle" />
+                                            <input type="hidden" id="exportValue9" name="exportValue" />
+                                        
+                                            <button id="cound-4">计算</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 详情 -->
+                            <div class=" cont ">
+                                <div class="row">
+                                <div class="col-6" style=" height: 423px;">
+                                        <div class="d-11">
+                                            <span class="q1" style="float: left;"></span>
+                                            <p style="float: left;margin-left: 5px;font-size: 16px;">派出所管辖</p>
+                                        </div>
+                                        <table class="layui-hide" id="testsix"></table>
+                            
+                            
+                            
+                                    </div>
+                                <div class="col-6" style=" height: 423px;">
+                                        <div class="d-11">
+                                            <span class="q1" style="float: left;"></span>
+                                            <p style="float: left;margin-left: 5px;font-size: 16px;">警情分类</p>
+                                            <div class="pull-right" style="float: right;    margin-top: 10px;">
+                            
+                                                <input style="margin-left: 16px;" type="radio" id="" name="layTableRadio_9" lay-type="layTableRadio" value="八类危害严重刑事犯罪">八类危害严重刑事犯罪
+                            
+                                                <input style="margin-left: 16px;" type="radio" id="" name="layTableRadio_9" lay-type="layTableRadio"  value="侵财犯罪">侵财犯罪
+                            
+                                                <input style="margin-left: 16px;" type="radio" id="" name="layTableRadio_9" lay-type="layTableRadio" value="秩序类">秩序类
+                            
+                                                <input style="margin-left: 16px;" type="radio" id="" name="layTableRadio_9" lay-type="layTableRadio" value="其他">其他
+                            
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <table class="layui-hide" id="testsev"></table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 lkj1">
+                                        <div class="d-11">
+                                            <span class="q1" style="float: left;"></span>
+                                            <p style="float: left;margin-left: 5px;font-size: 16px; color: aliceblue;">
+                                                月份选择</p>
+                                        </div>
+                                        <div class="div333">
+                                            <label class="layui-form-label">开始时间</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" class="layui-input" id="test99" placeholder="请选择日期">
+                                            </div>
+                                        </div>
+                                        <div class="div333">
+                                            <label class="layui-form-label">结束时间</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" class="layui-input" id="test1010" placeholder="请选择日期">
+                                            </div>
+                                        </div>
+                                        <div class="d-11">
+                                            <span class="q1" style="float: left;"></span>
+                                            <p style="float: left;margin-left: 5px;font-size: 16px; color: aliceblue;">
+                                                同比月份</p>
+                                        </div>
+                                        <div class="div333">
+                                            <label class="layui-form-label">开始时间</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" class="layui-input" id="test1111" placeholder="请选择日期">
+                                            </div>
+                                        </div>
+                                        <div class="div333">
+                                            <label class="layui-form-label">结束时间</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" class="layui-input" id="test1212" placeholder="请选择日期">
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-6 lkj1">
+                                        <div class="d-11">
+                                            <span class="q1" style="float: left;"></span>
+                                            <p style="float: left;margin-left: 5px;font-size: 16px; color: aliceblue;">
+                                                分类统计</p>
+                                        </div>
+                                        <div class="row" id="tjRadiosss">
+                                            <div class="col-md-3 col-sm-3" style="text-align: right;">统计:</div>
+                            
+                                            <div class="col-md-3 col-sm-3">
+                                                <input type="radio" id="" name="layTableRadio_9" lay-type="layTableRadio" value="刑事">
+                                                刑事发案
+                                            </div>
+                                            <div class="col-md-3 col-sm-3">
+                                                <input type="radio" id="" name="layTableRadio_9" lay-type="layTableRadio" value="受理">
+                                                受理总数
+                                            </div>
+                                            <div class="col-md-3 col-sm-3">
+                                                <input type="radio" id="" name="layTableRadio_9" lay-type="layTableRadio" value="行政">
+                                                行政发案
+                                            </div>                                        
+                                        </div>
+                                        <div class="row trs">
+                                            <div class="col-md-3 col-sm-3" style="text-align: right;">计算:</div>
+                                        
+                                            <div class="col-md-3 col-sm-3">
+                                                <input type="checkbox" id="tj_xs" name="tc" value="同比">
+                                                同比
+                                            </div>
+                                            <div class="col-md-3 col-sm-3">
+                                                <input type="checkbox" id="tj_sl" name="tc" value="环比">
+                                                环比
+                                            </div>
+                                            <div class="col-md-3 col-sm-3">
+                                                <input type="checkbox" id="tj_xz" name="tc" value="升降幅">
+                                                升降幅
+                                            </div>
+                                        </div>
+                                        
+                                        <div class=" row ted">
+                                            <div class="col-md-3 col-sm-3" style="text-align: right;">排序:</div>
+                                        
+                                            <div class="col-md-3 col-sm-3">
+                                                <input type="radio" id="" name="tz" value=" 升序">
+                                                升序
+                                            </div>
+                                            <div class="col-md-3 col-sm-3">
+                                        
+                                            </div>
+                                            <div class="col-md-3 col-sm-3">
+                                                <input type="radio" id="" name="tz" value="降序">
+                                                降序
+                                            </div>
+                                        </div>
+                            
+                            
+                                    </div>
+                                    <div class="ji">
+                                        <input type="hidden" id="exportType3" name="exportType" />
+                                        <input type="hidden" id="exportTitle3" name="exportTitle" />
+                                        <input type="hidden" id="exportValue3" name="exportValue" />
+                                    
+                                        <button id="cound-2">计算</button>
+                                    </div>
+                                </div>
+                            </div>
+                                <!-- 分类 -->
+                                <div class="cont">
+                                    <div class="row">
+                                        <div class="col-6 " style="background-color: #173483; height: 423px;">
+                                            <div class="d-1">
+                                                <span class="q1" style="float: left;"></span>
+                                                <p style="float: left;margin-left: 5px;font-size: 16px;">警情分类</p>
+                                                <div class="pull-right" style="float: right;    margin-top: 10px;">
+                                        
+                                                    <input style="margin-left: 16px;" type="checkbox" id="dl_1" name="dl2" value="八类危害严重刑事犯罪">八类危害严重刑事犯罪
+                                        
+                                                    <input style="margin-left: 16px;" type="checkbox" id="dl_2" name="dl2" value="侵财犯罪">侵财犯罪
+                                        
+                                                    <input style="margin-left: 16px;" type="checkbox" id="dl_3" name="dl2" value="秩序类">秩序类
+                                        
+                                                    <input style="margin-left: 16px;" type="checkbox" id="dl_4" name="dl2" value="其他">其他
+                                        
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <table class="layui-hide" id="testhery"></table>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <div class="col-12 plo1">
+                                                    <div class="d-1">
+                                                        <span class="q1" style="float: left;"></span>
+                                                        <p style="float: left;margin-left: 5px;font-size: 16px; color: aliceblue;">
+                                                            月份选择</p>
+                                                    </div>
+                                                    <div class="div33">
+                                                        <label class="layui-form-label">开始时间</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test33" placeholder="请选择日期">
+                                                        </div>
+                                                    </div>
+                                                    <div class="div33">
+                                                        <label class="layui-form-label">结束时间</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test44" placeholder="请选择日期">
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="col-12 plo1">
+                                                    <div class="d-1">
+                                                        <span class="q1" style="float: left;"></span>
+                                                        <p style="float: left;margin-left: 5px;font-size: 16px; color: aliceblue;">
+                                                            同比月份</p>
+                                                    </div>
+                                                    <div class="div33">
+                                                        <label class="layui-form-label">开始时间</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test55" placeholder="请选择日期">
+                                                        </div>
+                                                    </div>
+                                                    <div class="div33">
+                                                        <label class="layui-form-label">结束时间</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test66" placeholder="请选择日期">
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 ploss">
+                                            <div class="d-1">
+                                                <span class="q1" style="float: left;"></span>
+                                                <p style="float: left;margin-left: 5px;font-size: 16px; color: aliceblue;">
+                                                    分类统计</p>
+                                            </div>
+                                            <div class="row" id="tjRadio">
+                                                <div class="col-md-3 col-sm-3" style="text-align: right;">计算:</div>
+                                            
+                                                <div class="col-md-3 col-sm-3">
+                                                    <input type="checkbox" id="" name="ty" value="同比">
+                                                    同比
+                                                </div>
+                                                <div class="col-md-3 col-sm-3">
+                                                    <input type="checkbox" id="" name="ty" value="环比">
+                                                    环比
+                                                </div>
+                                                <div class="col-md-3 col-sm-3">
+                                                    <input type="checkbox" id="" name="ty" value="生降幅">
+                                                    生降幅
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 plo">
+                                            <div class="d-1">
+                                                <span class="q1" style="float: left;"></span>
+                                                <p style="float: left;margin-left: 5px;font-size: 16px; color: aliceblue;">
+                                                    分类统计</p>
+                                            </div>
+                                            <div class="row" id="tjRadioss">
+                                                <div class="col-md-3 col-sm-3" style="text-align: right;">统计:</div>
+                                            
+                                                <div class="col-md-3 col-sm-3">
+                                                    <input type="checkbox" id="" name="tj2" value="刑事">
+                                                    刑事发案
+                                                </div>
+                                                <div class="col-md-3 col-sm-3">
+                                                    <input type="checkbox" id="" name="tj2" value="受理">
+                                                    受理总数
+                                                </div>
+                                                <div class="col-md-3 col-sm-3">
+                                                    <input type="checkbox" id="" name="tj2" value=" 行政">
+                                                    行政发案
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="ji">
+                                        <input type="hidden" id="exportType" name="exportType" />
+                                        <input type="hidden" id="exportTitle" name="exportTitle" />
+                                        <input type="hidden" id="exportValue" name="exportValue" />
+                                    
+                                        <button id="cound-1">计算</button>
+                                    </div>
+                                </div>
+                                <!-- 基础表 -->
+                                <div class=" cont active ">
+                                    <div class="row">
+                                        <div class="col-6" style=" height: 423px;">
+                                            <div class="d-1">
+                                                <span class="q1" style="float: left;"></span>
+                                                <p style="float: left;margin-left: 5px;font-size: 16px;">派出所管辖</p>
+                                            </div>
+                                            <table class="layui-hide" id="test"></table>
+
+
+
+                                        </div>
+                                    <div class="col-6" style=" height: 423px;">
+                                            <div class="d-1">
+                                                <span class="q1" style="float: left;"></span>
+                                                <p style="float: left;margin-left: 5px;font-size: 16px;">警情分类</p>
+                                                <div class="pull-right" style="float: right;    margin-top: 10px;">
+
+                                                    <input style="margin-left: 16px;" type="checkbox" id="dll_1"
+                                             onclick="checkboxOnclick(this)"  name="dlm" value="八类危害严重刑事犯罪">八类危害严重刑事犯罪
+
+                                                    <input style="margin-left: 16px;" type="checkbox" id="dll_2"
+                                                        name="dl" value="侵财犯罪">侵财犯罪
+
+                                                    <input style="margin-left: 16px;" type="checkbox" id="dll_3"
+                                                        name="dl" value="秩序类">秩序类
+
+                                                    <input style="margin-left: 16px;" type="checkbox" id="dll_4"
+                                                        name="dl" value="其他">其他
+
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <table class="layui-hide" id="testoo"></table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 lkj">
+                                            <div class="d-1">
+                                                <span class="q1" style="float: left;"></span>
+                                                <p
+                                                    style="float: left;margin-left: 5px;font-size: 16px; color: aliceblue;">
+                                                    月份选择</p>
+                                            </div>
+                                            <div class="div33">
+                                                <label class="layui-form-label">开始时间</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" class="layui-input" id="test11"
+                                                        placeholder="请选择日期">
+                                                </div>
+                                            </div>
+                                            <div class="div33">
+                                                <label class="layui-form-label">结束时间</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" class="layui-input" id="test22"
+                                                        placeholder="请选择日期">
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="col-6 lkj">
+                                            <div class="d-1">
+                                                <span class="q1" style="float: left;"></span>
+                                                <p
+                                                    style="float: left;margin-left: 5px;font-size: 16px; color: aliceblue;">
+                                                    分类统计</p>
+                                            </div>
+                                            <div class="row" id="tjRadiossss">
+                                                <div class="col-md-3 col-sm-3" style="text-align: right;">统计:</div>
+
+                                                <div class="col-md-3 col-sm-3">
+                                                    <input type="checkbox" id="" name="tj" value="刑事发案">
+                                                    刑事发案
+                                                </div>
+                                                <div class="col-md-3 col-sm-3">
+                                                    <input type="checkbox" id="" name="tj" value="受理总数">
+                                                    受理总数
+                                                </div>
+                                                <div class="col-md-3 col-sm-3">
+                                                    <input type="checkbox" id="" name="tj" value="行政发案">
+                                                    行政发案
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="ji">
+                                        <input type="hidden" id="exportType2" name="exportType" /> 
+                                        <input type="hidden" id="exportTitle2" name="exportTitle" />
+                                        <input type="hidden" id="exportValue2" name="exportValue" />
+
+                                        <button id="cound">计算</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+                <div class="col-md-12" id="tishi">
+                    <!-- <img class="img-responsive center-block" src="images/3_classify.png"> -->
+                    <div id="loading" style="height: 54%; ">
+                        <img src="./imgs/loading.gif" style="width: 8%; height: 69%; ">
+                        <div style=" margin-top: 1.4%;">
+                            <span style="font-family: 微软雅黑; color: aliceblue; font-size: 18px;">数据统计中，请稍后...</span>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="row">
+                    <div class="col-12 wl" id="content" style="overflow-x: auto; overflow-y: auto; ">
+
+                    </div>
+                                     
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./vendor/jquery/jquery.min.js"></script>
+    <script src="./vendor/popper.js/popper.min.js"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./js/carbon.js"></script>
+    <script src="../dist/layui/layui.all.js"></script>
+    <script src="./js/bashpath.js"></script>
+    <script src="./js/tongji.js"></script>
+    <!--选项卡-->
+    <script type="text/javascript">
+        $(function () {
+            $('.category ul li').click(function () {
+                var i = $(this).index();
+                $(this).addClass('active').siblings().removeClass('active');
+                $('.contents .cont').eq(i).addClass('active').siblings().removeClass('active');
+                $('#content').html("");
+            })
+        });
+
+    </script>
+    <script>
+         $("#exit").on("click", function () {  //将退出按钮的id设置为exit，然后将这个函数在公共文件里面即可
+                if (confirm('系统提示，您确定要退出本次登录吗?')) {
+                    //  session.removeAttribute(username);
+                    sessionStorage.removeItem("username")
+                    //  sessionStorage.removeItem(limit)
+                    location.href = './login.html';
+                }
+            })
+             // 判断session是否存在
+                if (se == null) {
+
+                    window.location.href = "./login.html";
+
+                }
+         $('#bei').click(function () {
+                var t = $("#sousuo").val();
+
+                if (t == null || t == undefined || t == '') {
+                    layer.msg('搜索内容不可以为空')
+                    console.log("value 为空")
+                } else {
+                    var t = encodeURI(encodeURI(t));
+                    console.log(t)
+                    var url = "./tables.html?t=" + t + "&username=" + se;
+                    window.location.href = url;
+                }
+
+            })
+
+        layui.use('upload', function () {
+            
+            var $ = layui.jquery
+                , upload = layui.upload;
+             
+            upload.render({
+                elem: '#test3'
+                , url: basePath + '/Jqtj/uploadFile' //改成您自己的上传接口
+                , accept: 'file' //普通文件
+                ,before: function (obj) { //obj参数包含的信息，跟choose回调完全一致
+                    layer.load(); //上传loading
+                  
+                }
+                , done: function (res) {
+                   layer.closeAll('loading');
+                    console.log(res);
+                    if(res.message == true) {
+                         
+                        
+                        layer.msg('上传成功');
+                    } else {
+                         layer.msg('上传失败');
+                    }
+                }
+            });
+        });
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+
+            //常规用法
+            laydate.render({
+                elem: '#test11',
+                type: 'datetime'
+            });
+
+            laydate.render({
+                elem: '#test22',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#test33',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#test44',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#test55',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#test66',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#test77',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#test88',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#test99',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#test1010',
+                type: 'datetime'
+            });
+             laydate.render({
+                elem: '#test1111',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#test1212',
+                type: 'datetime'
+            });
+             laydate.render({
+                elem: '#test1515',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#test1616',
+                type: 'datetime'
+            });
+        });
+        //    基础类
+               
+                         
+        
+      
+         
+                 
+                   
+                    
+    </script>
+</body>
+
+</html>

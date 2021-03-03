@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>警情图谱</title>
+    <link rel="stylesheet" href="./vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="./vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./css/table.css">
+    <link rel="stylesheet" href="./css/miaov_style.css">
+</head>
+<body class="sidebar-fixed header-fixed">
+<div class="page-wrapper">
+    <nav class="navbar page-header">
+        <p style="position: absolute;top: 2px;left: 17px; color: aliceblue; font: 16px Microsoft YaHei;">
+            <i class="icon icon-user"></i> 用户名：<span id="username"></span>
+        </p>
+        
+        <a class="navbar-brand" href="#" id="exit">
+        
+            <i class="icon icon-info"></i> 退出登录
+        </a>
+    
+        <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">
+            <i class="fa fa-bars"></i>
+        </a>
+        <a href="#">
+            <img src="./imgs/jing.png" alt="logo" style="width: 45px;height: 45px;    margin-bottom: 14px;">
+        </a>
+        <h1 style="color: aliceblue;font-weight: 700;" class="xiongan">雄安新区公安局情报合成作战中心重复报警数据分析平台</h1>
+        <ul class="navbar-nav ml-auto">
+            <div class="search d7">
+              
+                    <input type="text" id="sousuo" >
+                    <button type="submit" id="bei"></button>
+              
+            </div>
+        </ul>
+    
+    
+    </nav>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav">
+                    <!-- <li class="nav-title">Navigation</li> -->
+            
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link ">
+                            <i class="icon icon-speedometer"></i> 警情监测
+                        </a>
+                    </li>
+            
+            
+                    <li class="nav-item">
+                        <a href="forms.html" class="nav-link">
+                            <i class="icon icon-puzzle"></i> 案件分析
+                        </a>
+                    </li>
+            
+                    <!-- <li class="nav-item">
+                                                                    <a href="tables.html" class="nav-link ">
+                                                                        <i class="icon icon-grid"></i> 数据检索
+                                                                    </a>
+                                                                </li> -->
+                    <li class="nav-item">
+                        <a href="chartjs.html" class="nav-link active">
+                            <i class="icon icon-pin"></i> 警情图谱
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="alerts.html" class="nav-link">
+                            <i class="icon icon-film"></i> 警情分析
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="blank.html" class="nav-link ">
+                            <i class="icon icon-docs"></i> 警情统计
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="settings.html" class="nav-link ">
+                            <i class="icon icon-calculator"></i> 数据导出
+                        </a>
+                    </li>
+                    <li class="nav-item nav-dropdown">
+                        <a href="#" class="nav-link nav-dropdown-toggle ">
+                            <i class="icon icon-umbrella"></i>后台管理<i class="fa fa-caret-left"></i>
+                        </a>
+            
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a href="cards.html" class="nav-link  ">
+                                    <i class="icon icon-umbrella"></i>用户管理
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="buttons.html" class="nav-link ">
+                                    <i class="icon icon-umbrella"></i>用户日志
+                                </a>
+                            </li>
+            
+                            <li class="nav-item">
+                                <a href="tabs.html" class="nav-link ">
+                                    <i class="icon icon-umbrella"></i>搜索记录
+                                </a>
+                            </li>
+            
+                            <li class="nav-item">
+                                <a href="register.html" class="nav-link">
+                                    <i class="icon icon-umbrella"></i>导出记录
+                                </a>
+                            </li>
+            
+                        </ul>
+                    </li>
+            
+            
+                </ul>
+            </nav>
+        </div>
+
+        <div class="content">
+            <div class="row">
+                <div class="col-12 dl">
+                    <p style="float: left;">警情图谱</p>
+                    <div class="al1">
+                        <button class="bbt" onclick="analyze()">生成图谱</button>
+                        <div class="div3">
+                            <div class="layui-input-inline">
+                                <select id="ervFonr">
+                                    <option value="请选择">请选择</option>
+                                    <option value="全部">全部</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p style="float: right; margin-right: 15px; margin-left: 15px;">派出所</p>
+                        <div class="div3">
+        
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="stop" placeholder="请选择结束日期">
+                            </div>
+                        </div>
+                        <div class="heng"></div>
+                        <div class="div3">
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="start" placeholder="请选择开始日期">
+                            </div>
+                        </div>
+                        <p style="float: right; margin-right: 15px;">选择时间</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 警情关系图谱 -->
+            <div class="row">
+                <div class="col-12 all" id="map"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./vendor/jquery/jquery.min.js"></script>
+<script src="./vendor/popper.js/popper.min.js"></script>
+<script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="./js/bashpath.js"></script>
+<script src="./js/carbon.js"></script>
+<script src="./js/miaov.js"></script>
+<script src="./js/echarts.js"></script>
+<script src="./layui/layui.all.js"></script>
+<script>
+     $("#exit").on("click", function () {  //将退出按钮的id设置为exit，然后将这个函数在公共文件里面即可
+            if (confirm('系统提示，您确定要退出本次登录吗?')) {
+                //  session.removeAttribute(username);
+                sessionStorage.removeItem("username")
+                //  sessionStorage.removeItem(limit)
+                location.href = './login.html';
+            }
+        })
+         // 判断session是否存在
+            if (se == null) {
+
+                window.location.href = "./login.html";
+
+            }
+       $('#bei').click(function () {
+            var t = $("#sousuo").val();
+
+            if (t == null || t == undefined || t == '') {
+                layer.msg('搜索内容不可以为空')
+                console.log("value 为空")
+            } else {
+                var t = encodeURI(encodeURI(t));
+                console.log(t)
+                var url = "./tables.html?t=" + t + "&username=" + se;
+                window.location.href = url;
+            }
+
+        })
+    layui.use('laydate', function () {
+              var laydate = layui.laydate;
+
+              //常规用法
+              laydate.render({
+                  elem: '#stop',
+                  type: 'datetime'
+              });
+              laydate.render({
+                  elem: '#start',
+                  type: 'datetime'
+              });
+          });
+
+          $(function () {
+              $.ajax({
+                  url: basePath + '/pcs/selAll',
+                  dataType: "json",
+                  type: "POST",
+                  success: function (data) {
+                      var option;
+                      for (var x in data) {
+                          option = $("<option value=\"" + data[x] + "\">" + data[x]
+                              + "</option>");
+                          option.appendTo("#ervFonr");
+                      }
+                  }
+              });
+              map();
+          });
+          //分析
+          function analyze() {
+              var StartTime = document.getElementById("start").value;
+              var StopTime = document.getElementById("stop").value;
+              var PCS = document.getElementById("ervFonr").value;
+              if (StartTime == "" && StopTime == "") {
+                //   alert("请输入时间");
+                  layer.msg("请输入时间")
+                  return false;
+              }
+              if (StartTime == "" ) {
+                 layer.msg("请输入开始时间")
+                  return false;
+              }
+              if (StopTime == "") {
+                 layer.msg("请输入结束时间")
+                  return false;
+              }
+              if (PCS == "请选择") {
+                layer.msg("请输入派出所")
+                  return false;
+              }
+              map(StartTime, StopTime, PCS);
+          }
+          //警情图谱
+          function map(StartTime, StopTime, PCS) {
+              $
+                  .ajax({
+                      url: basePath + '/Jqtb/analyze',
+                      data: {
+                          StartTime: StartTime,
+                          StopTime: StopTime,
+                          PCS: PCS
+                      },
+                      dataType: "json",
+                      type: "POST",
+                      success: function (data) {
+                          var list = {};
+                          var arr = data.BT;
+                          for (var key in arr) {
+                              list[key] = arr[key];
+                          }
+                          var myChart = echarts.init(document
+                              .getElementById('map'));
+                          var categories = [];
+                          for (var i in list) {
+                              categories[i] = {
+                                  name: list[i]
+                              };
+                          }
+                          option = {
+                              // 图的标题
+                              title: {
+                                  text: '派出所分析关系图',
+                                   textStyle:{
+                                       color: '#fff'
+                                   }
+                              },
+                              // 提示框的配置
+                              tooltip: {
+                                  formatter: function (x) {
+                                      return x.data.des;
+                                  }
+                              },
+                              // 工具箱
+                              toolbox: {
+                                  // 显示工具箱
+                                  show: true,
+                                  feature: {
+                                      mark: {
+                                          show: true
+                                      },
+                                      // 还原
+                                      restore: {
+                                          show: true
+                                      },
+                                      // 保存为图片
+                                      saveAsImage: {
+                                          show: true
+                                      }
+                                  }
+                              },
+                              legend: [{
+                                  // selectedMode: 'single',
+                                  data: categories.map(function (a) {
+                                      return a.name;
+                                  }),
+                                   textStyle: {
+                                      color: '#0ea6b4'
+                                  }
+                              }],
+                              series: [{
+                                  type: 'graph', // 类型:关系图
+                                  layout: 'force', //图的布局，类型为力导图
+                                  symbolSize: 40, // 调整节点的大小
+                                  roam: true, // 是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移,可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+                                  edgeSymbol: ['circle', 'arrow'],
+                                  edgeSymbolSize: [2, 10],
+                                  edgeLabel: {
+                                      normal: {
+                                          textStyle: {
+                                              fontSize: 20
+                                          }
+                                      }
+                                  },
+                                  force: {
+                                      repulsion: 2500,
+                                      edgeLength: [10, 50]
+                                  },
+                                  draggable: true,
+                                  lineStyle: {
+                                      normal: {
+                                          width: 2,
+                                          color: '#fff',
+                                      }
+                                  },
+                                  edgeLabel: {
+                                      normal: {
+                                          show: true,
+                                          formatter: function (x) {
+                                              return x.data.name;
+                                          }
+                                      }
+                                  },
+                                  label: {
+                                      normal: {
+                                          show: true,
+                                        //   formatter: function (params, index) {
+                                        //       // 超出省略
+                                        //       params = params.name.toString();
+                                        //       var maxlength = 6;
+                                        //       if (params.length > maxlength) {
+                                        //           return params.substring(0, maxlength - 1) + '...';
+                                        //       } else {
+                                        //           return params;
+                                        //       }
+                                        //   },
+                                          textStyle: {}
+                                      }
+                                  },
+
+                                  // 数据
+                                  data: data.Data,
+                                  links: data.Links,
+                                  categories: categories,
+                              }]
+                          };
+                          myChart.setOption(option);
+                      }
+                  });
+
+          };
+
+</script>
+</body>
+</html>

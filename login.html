@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>警情登录</title>
+    
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body onkeydown="keyLogin();">
+<div>
+    <div class="top">用数据改变未来</div>
+    <div class="content">
+        <div class="login">
+            <div class="title xiongan" style="text-align: center;" >雄安新区公安局情报合成作战中心重复报警数据分析平台</div>
+            <div class="line">
+                <!-- <img class="smallImg" src="img/icon-4.png" /> -->
+                <span>用户名：</span><input placeholder="请输入账号" type="text" id="cms_login_username"/>
+            </div>
+            <div class="line">
+                <!-- <img class="smallImg" src="img/icon-5.png" /> -->
+                <span>密码：</span><input placeholder="请输入密码" type="password" id="cms_login_passward"/>
+            </div>
+            <button type="button" class="logBut" id="denglu">登&nbsp;&nbsp;录</button>
+            <button type="button" class="logButs">重&nbsp;&nbsp;置</button>
+        </div>
+    </div>
+
+</div>
+<script src="./vendor/jquery/jquery.min.js"></script>
+<!-- <script src="./js//bashpath.js"></script> -->
+<script src="./layui/layui.all.js"></script>
+<script>
+    function keyLogin() {
+            if (event.keyCode == 13)  //回车键的键值为13
+                document.getElementById("denglu").click(); //调用登录按钮的登录事件
+        }
+      $('#bei').click(function () {
+            var t = $("#sousuo").val();
+            var t = encodeURI(encodeURI(t));
+            console.log(t)
+            var url = "./tables.html?t=" + t;
+            window.location.href = url;
+        })
+        $('.logButs').click(function() {
+            
+            $("#cms_login_username").val(""),
+            $("#cms_login_passward").val("")
+        })
+        // 禁止浏览器后退
+        $(function () {
+                if (window.history && window.history.pushState) {
+                    $(window).on("popstate", function () {
+                        window.history.pushState("forward", null, "#");
+                        window.history.forward(1);
+                    });
+                }
+                window.history.pushState("forward", null, "#"); //在IE中必须得有这两行
+                window.history.forward(1);
+            });
+            
+          // 点击按钮判断账户密码
+       $(".logBut").click(function () {
+                var username = $("#cms_login_username").val();
+                var password = $("#cms_login_passward").val();
+                // localStorage.setItem("username", $("#cms_login_username").val());
+                sessionStorage.setItem("username", $("#cms_login_username").val());
+                
+                if (username === '' || password === '') {
+                    layer.msg("请输入用户名和密码！");
+                    return false;
+                }
+                $.ajax({
+                    //地址
+                    url: "http://172.16.1.189:8888/NewSimilar/xa/login/userLogin",
+                    //方式
+                    type: "post",
+                    dataType: "json",
+
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    //参数
+                    data: {
+                        username: username,
+                        password: password
+                    },
+                    //成功的函数 注意res是返回的结果
+                    success: function (res) {
+                        console.log(res)
+                        if (res.status == 0) {                        
+                            var limit = res.user.jS
+                            console.log(limit)
+                            sessionStorage.setItem("limit", limit);
+                            window.location.href = "./index.html" 
+                        }  else {
+                            layer.msg(res.message)
+                        }
+                    }
+                })
+            })
+
+
+          
+</script>
+</body>
+</html>

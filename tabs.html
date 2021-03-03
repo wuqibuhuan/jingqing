@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户管理</title>
+    <link rel="stylesheet" href="./vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="./vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./css/table.css">
+</head>
+
+<body class="sidebar-fixed header-fixed">
+    <div class="page-wrapper">
+        <nav class="navbar page-header">
+            <p style="position: absolute;top: 2px;left: 17px; color: aliceblue; font: 16px Microsoft YaHei;">
+                <i class="icon icon-user"></i> 用户名：<span id="username"></span>
+            </p>
+            
+            <a class="navbar-brand" href="#" id="exit">
+            
+                <i class="icon icon-info"></i> 退出登录
+            </a>
+
+            <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">
+                <i class="fa fa-bars"></i>
+            </a>
+            <a href="#">
+                <img src="./imgs/jing.png" alt="logo" style="width: 45px;height: 45px;    margin-bottom: 14px;">
+            </a>
+            <h1 style="color: aliceblue;font-weight: 700;" class="xiongan">雄安新区公安局情报合成作战中心重复报警数据分析平台</h1>
+            <ul class="navbar-nav ml-auto">
+                <div class="search d7">
+
+                    <input type="text" id="sousuo" >
+                    <button type="submit" id="bei"></button>
+
+                </div>
+            </ul>
+
+
+        </nav>
+
+        <div class="main-container">
+            <div class="sidebar">
+                <nav class="sidebar-nav">
+                    <ul class="nav">
+                        <!-- <li class="nav-title">Navigation</li> -->
+
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link ">
+                                <i class="icon icon-speedometer"></i> 警情监测
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="forms.html" class="nav-link">
+                                <i class="icon icon-puzzle"></i> 案件分析
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-item">
+                                            <a href="tables.html" class="nav-link ">
+                                                <i class="icon icon-grid"></i> 数据检索
+                                            </a>
+                                        </li> -->
+                        <li class="nav-item">
+                            <a href="chartjs.html" class="nav-link ">
+                                <i class="icon icon-pin"></i> 警情图谱
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="alerts.html" class="nav-link ">
+                                <i class="icon icon-film"></i> 警情分析
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="blank.html" class="nav-link ">
+                                <i class="icon icon-docs"></i> 警情统计
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="settings.html" class="nav-link ">
+                                <i class="icon icon-calculator"></i> 数据导出
+                            </a>
+                        </li>
+                        <li class="nav-item nav-dropdown">
+                            <a href="#" class="nav-link nav-dropdown-toggle ">
+                                <i class="icon icon-umbrella"></i>后台管理<i class="fa fa-caret-left"></i>
+                            </a>
+
+                            <ul class="nav-dropdown-items">
+                                <li class="nav-item">
+                                    <a href="cards.html" class="nav-link  ">
+                                        <i class="icon icon-umbrella"></i>用户管理
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="buttons.html" class="nav-link ">
+                                        <i class="icon icon-umbrella"></i>用户日志
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="tabs.html" class="nav-link active">
+                                        <i class="icon icon-umbrella"></i>搜索记录
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="register.html" class="nav-link">
+                                        <i class="icon icon-umbrella"></i>导出记录
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="content">
+                <div class="row clearfix">
+                    <div class="col-12 dl">
+                        <p>后台管理</p>
+                    </div>
+                    <div class="col-12 el">
+                        <div class="box">
+                            <div class="title">
+                                <h3 style="float: left;">系统搜索列表</h3>
+                                <!-- <button class="btn btn-success" onclick="add_user()">添加</button> -->
+                            </div>
+                            <div class="clearfix"></div>
+
+
+                            <div class="investment_con">
+                                <!-- 核查内容 -->
+
+
+
+                                <div class="lists">
+                                    <table class="table-striped table-bordered table-hover" id="demo" lay-filter="demo">
+                                    </table>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="./vendor/jquery/jquery.min.js"></script>
+    <script src="./vendor/popper.js/popper.min.js"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- <script src="./vendor/chart.js/chart.min.js"></script> -->
+    <script src="./js/carbon.js"></script>
+    <script src="./layui/layui.all.js"></script>
+    <script src="./js/bashpath.js"></script>
+    <script>
+         $("#exit").on("click", function () {  //将退出按钮的id设置为exit，然后将这个函数在公共文件里面即可
+                if (confirm('系统提示，您确定要退出本次登录吗?')) {
+                    //  session.removeAttribute(username);
+                    sessionStorage.removeItem("username")
+                    //  sessionStorage.removeItem(limit)
+                    location.href = './login.html';
+                }
+            })
+            // 判断session是否存在
+                if (se == null) {
+
+                    window.location.href = "./login.html";
+
+                }
+        $('#bei').click(function () {
+            var t = $("#sousuo").val();
+          
+            if (t == null || t == undefined || t == '') {
+                layer.msg('搜索内容不可以为空')
+                console.log("value 为空")
+            } else {
+                var t = encodeURI(encodeURI(t));
+                console.log(t)
+                var url = "./tables.html?t=" + t + "&username=" + se;
+                window.location.href = url;
+            }
+           
+        })
+        $(function () {
+            loadList();
+        });
+
+        // window.setInterval("freshList()",7000);
+       function loadList() {
+
+
+            //获取查询时间与查询内容
+            var userId = $("#userId").val();
+            var createDate = $("#time").val();
+            var status = $("#ervFonr-1 option:selected").val();
+            var documentName = $("#name").val();
+            layui.use(['table', 'layer', 'laydate', 'laypage', 'util'], function () {
+                var $ = layui.$,
+                    table = layui.table,
+                    layer = layui.layer,
+                    laydate = layui.laydate;
+                var laypage = layui.laypage;
+                var util = layui.util;
+                $.ajaxSetup({
+                    xhrFields: {
+                        withCredentials: true
+                    }
+                });
+                //自定义格式
+                laydate.render({
+                    elem: '#demo',
+                    format: 'yyyy/MM/dd',
+                    range: true,
+                    theme: '#ff7f4f',
+                    done: function (value, date, endDate) {
+                        $("#time").val(value);
+                        table.reload('demo', {
+                            url: basePath + '/Log/SearchLog',
+                            where: { //设定异步数据接口的额外参数，任意设
+                                pageSize: '15',
+                                pageName: '1',
+                                // userId:userId,
+                                createDate: value,
+                                status: "",
+                                documentName: "",
+                                time: time
+                            }
+                        });
+                    }
+                });
+
+
+
+                table.render({
+                    elem: '#demo',
+                    page: {
+                        theme: '#ff7f4f',
+
+
+
+                    },
+
+                    page: true,
+                    // limits: [5, 10, 15], //显示
+                    limit: 15,//每页默认显示的数量
+                    where: {
+                        // userId:userId,
+                        // createDate: createDate,
+                        // day: status,
+                        // likeName: documentName,
+                        // time: time
+                    } //如果无需传递额外参数，可不加该参数http-server
+                    ,
+                    url: basePath + '/Log/SearchLog',
+                    cols: [
+                        [
+                            // { type: 'checkbox', width: 100, fixed: 'left', align: 'center' }
+                            , {
+                                title: '序号',
+                                align: 'center',
+                                type: 'numbers',
+                                // sort: true,
+                                width: 80
+                            }, {
+                                field: 'uSERNAME',
+                                title: '用户名',
+                                width: "20%",
+                                align: 'center'
+                            }, {
+                                field: 'iP',
+                                width: "25%",
+                                title: '地址',
+                                align: 'center',
+                                //     templet: function (data) {// 替换数据
+
+                                //         if (data.jS == 0) {
+                                //             return "意向";
+                                //         } else if (data.jS == 1) {
+                                //             return "管理员";
+                                //         } else if (data.jS == 2) {
+                                //             return "普通用户";
+                                //         }
+                                //     }
+                            },
+                            // {
+                            //     field: 'cJPCS',
+                            //     width: "15%",
+                            //     title: '出警派出所',
+                            //     align: 'center',
+                            //     // template: '#titleTpl'
+                            // },
+                            // {
+                            //     field: 'counts',
+                            //     width: 200,
+                            //     title: '上传用户',
+                            //     align: 'center',
+                            //     template: '#titleTpl'
+                            // },
+                            {
+                                field: 'sEARCH_TIME', width: "30%", title: '检索时间', align: 'center', templet: "<div>{{layui.util.toDateString(d.sEARCH_TIME, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                            }
+                            , {
+                                title: '检索内容',
+                                field: 'sEARCH_CONTENT',
+                                align: 'center',
+                                // toolbar: "#barDemo"
+                                // type: 'numbers',
+                                // sort: true,
+
+                            }
+                            // , { field: 'status', width: 213, title: '状态', align: 'center' }
+                            // , { field: 'uploadDate', width: 170, title: '上传时间', align: 'center' }
+                            // , { width: 283, title: '操作', align: 'center', toolbar: "#barDemo" }
+
+                        ]
+                    ],
+                    done: function (res, curr, count) {
+                      
+                        $('th').css({
+                            'background-color': '#ed6a1a',
+                            'color': '#fff',
+                            'font-weight': 'bold'
+                        })
+                    },
+                    parseData: function (res) { //res 即为原始返回的数据
+
+                        console.log(res.result)
+
+                        return {
+                            "code": res.status, //解析接口状态
+                            "msg": res.message, //解析提示文本
+                            "count": res.totalCount, //解析数据长度
+                            "data": res.result//解析数据列表
+                        };
+                    },
+                    request: {
+                        pageName: 'pageNo' //页码的参数名称，默认：page
+                        ,
+                        limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    }
+
+                });
+
+                //监听表格复选框选择
+                table.on('checkbox(demo)', function (obj) {
+                    console.log(obj);
+                });
+
+                //监听工具条
+                table.on('tool(demo)', function (obj) {
+                    // console.log(obj)
+                    var data = obj.data;
+                    console.log(data)
+                    $("#type").val(data.uSERNAME);
+                    // //    $("#name").val(data.password);
+                    $("#sele option:selected").val(data.userType)
+                    // $("#seles option:selected").val(data.isNormal)
+                    //   var opt = "<option value='data.userType" +  + "'>" + "</option>";
+                    if (obj.event === 'detail') {
+                        $(".yin").css("display", "block")
+                        $(".xiu-1").click(function () {
+                            $(".yin").css("display", "none")
+                        })
+
+                        $(".xiu").click(function () {
+
+                            var q = $("#type").val()
+                            console.log(q)
+                            var n = document.getElementById("name").value;
+                            var b = document.getElementById("newname").value;
+                            // alert(n)
+                            var w = $("#sele option:selected").val();
+                            // var e = $("#seles option:selected").val();
+                            $.ajax({
+                                type: "post",
+                                url: basePath + "/User/UpdatePassword",
+                                data: {
+                                    'UserName': q,
+                                    'New_password': b,
+                                    'role': w,
+                                    'Password': n,
+                                },
+                                // processData: false,
+                                dataType: "json",
+                                success: function (response) {
+                                    console.log(response)
+                                    if (response.status == 1) {
+                                        layer.msg("修改成功", { icon: 1 }, function () {
+                                            window.location.reload();
+
+                                        })
+                                    }
+                                }
+                            });
+                        })
+
+                    } else if (obj.event === 'del') {
+                        layer.confirm('确认删除？', {
+                            btn: ['确定', '取消']
+                            , btn1: function (index, layero) {
+                                //后台执行删除操作
+                                $.post(basePath + '/User/Delete', { 'id': obj.data.iD }, function (data) {
+                                    if (data.status == 0) {
+                                        layer.msg("删除成功", { time: 1800, icon: 1 });
+                                        loadList();
+                                    } else {
+                                        layer.msg('删除失败', { time: 1800, icon: 2 });
+                                    }
+                                }, 'json');
+                                layer.close(index);
+                            }, btn2: function (index, layero) {
+                                layer.close(index);
+                            }
+                        });
+                    } else if (obj.event === 'edit') {
+                        if (data.status == '已修改' || (data.status == '核查完成' && data.errorCount == '0')) {
+                            $.post('/eye/get-down', {
+                                'docId': data.id
+                            }, function (data, status) {
+                                if (data == 'false') {
+                                    layer.msg('下载失败', {
+                                        time: 1800,
+                                        icon: 2
+                                    });
+                                } else {
+                                    data = JSON.parse(data);
+                                    window.location.href = basePath + "/eye/down-file/" + data.downkey +
+                                        "/" + data.docId;
+                                }
+                            });
+                        } else {
+                            layer.msg('此文件不可以下载', {
+                                time: 1800,
+                                icon: 2
+                            });
+                        }
+                    }
+                });
+
+            });
+        };
+
+        $("#piliang").click(function () {
+            layui.use(['layer', 'table'], function () {
+                var table = layui.table,
+                    layer = layui.layer,
+                    $ = layui.$
+
+                var checkStatus = table.checkStatus('demo');
+                data = checkStatus.data;
+                if (data.length == 0) {
+                    layer.msg("请选择要删除的选项！");
+                } else {
+                    layer.confirm('确定批量删除文件吗?', function (index) {
+                        arr = new Array();;
+                        for (var i = 0; i < data.length; i++) {
+                            arr.push(data[i].id);
+                        }
+                        arr.join(",");
+                        console.log(arr);
+                        $.ajax({
+                            url: basePath + '/file/batchdeldoc',
+                            type: 'post',
+                            dataType: 'json',
+                            data: {
+                                'temp': arr.toString()
+                            }, //向服务端发送删除的id
+                            success: function (suc) {
+                                if (suc.status == 1) {
+                                    layer.msg("删除成功", {
+                                        time: 1800,
+                                        icon: 1
+                                    });
+                                    loadList();
+                                } else {
+                                    layer.msg('删除失败', {
+                                        time: 1800,
+                                        icon: 2
+                                    });
+                                }
+                                layer.close(index);
+                                table.reload('table', {
+                                    where: { //设定异步数据接口的额外参数，任意设
+                                        'id': 1
+                                    },
+                                    page: {
+                                        //  curr: 1 //重新从第 1 页开始
+                                        curr: $(".layui-laypage-em").next()
+                                            .html()
+                                    }
+                                })
+
+
+                            }
+                        });
+                        layer.close(index);
+                    });
+                }
+            });
+        });
+
+
+        /**
+* 添加个人用户
+*/
+        function add_user() {
+            layer.open({
+                type: 1,
+                title: '添加账号' //不显示标题栏
+                ,
+                closeBtn: false,
+                area: '600px;',
+                shade: 0.8,
+                btnAlign: 'c',
+                moveType: 1 //拖拽模式，0或者1
+                ,
+                btn: ['提交', '取消'],
+                content: '<div style="padding: 30px; line-height: 40px; background-color: #fff; color: #393D49; font-weight: 300;">' +
+                    '<table class="table-striped table-bordered table-hover" style="width:500px;text-align: center;">' +
+                    '<tr><td style="width: 70px;">用户名</td><td style="width: 130px;"><input class="form-control" id="add_type"></td></tr>' +
+                    '<tr><td style="width: 70px;">密码</td><td style="width: 130px;"><input class="form-control" id="add_name"></td></tr>' +
+                    '<tr><td style="width: 70px;">确认密码</td><td style="width: 130px;" > <input  class="form-control" id="add_password"> </td></tr>' +
+                    '<tr><td style="width: 175px;">选择用户</td><td><select id="selectid"  style="width: 289px; height:30px"><option>请选择</option><option value="机构管理员">机构管理员</option><option value="普通用户">普通用户</option></select ></td></tr></table>' +
+                    '</div>'
+
+                ,
+                yes: function () {
+
+                    var type = document.getElementById("add_type").value;
+                    var name = document.getElementById("add_name").value;
+                    var add_password = $("#add_password").val();
+
+                    var str = $("#selectid option:selected").val();
+                    var strs = $("#selectidd option:selected").val();
+                    console.log(name)
+                    console.log(str)
+                    //获得选中的值
+                    // $.ajax({
+                    //     type: "post",
+                    //     dataType: "json",
+                    //     url: basePath + "/level/levelList",
+                    //     data: {
+                    //         'select': str
+                    //     },
+                    //     xhrFields: {
+                    //         withCredentials: true
+                    //     },
+                    //     success: function (data) {
+                    //         console.log(data)
+                    //         //  if (msg) {
+                    //         //      alert(msg);
+                    //         //  }
+                    //     }
+                    // });
+
+                    $.ajax({
+                        type: "POST",
+                        url: basePath + '/user/addUser',
+                        data: {
+                            "userName": type,
+                            "password": add_password,
+
+                            "realName": name,
+                            "userType": str,
+
+                        },
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        dataType: "json",
+                        error: function () {
+                            //请求出错
+                            alert("出錯了！");
+                        },
+                        success: function (json) {
+                            console.log(json)
+                            //请求成功
+                            if (json.status == 1) {
+                                layer.msg("添加成功", {
+                                    icon: 1
+                                }, function () {
+                                    window.location.reload();
+
+
+
+                                })
+                            }
+
+                        }
+                    });
+
+                }
+            });
+
+        }
+
+    </script>
+</body>
+
+</html>

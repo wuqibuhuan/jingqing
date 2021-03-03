@@ -1,0 +1,1862 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>警情详情</title>
+    <link rel="stylesheet" href="./vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="./vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./css/table.css">
+    <style>
+        .hl p {
+            color: aliceblue;
+            margin-left: 25px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .mj .p1 {
+            color: aliceblue;
+            margin-left: 25px;
+            margin-top: 55px;
+            font-size: 16px;
+        }
+
+        .mj .p2 {
+            color: aliceblue;
+            margin-left: 35px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        
+    </style>
+</head>
+
+<body class="sidebar-fixed header-fixed">
+    <div class="page-wrapper">
+        <div class="page-header">
+            <nav class="navbar page-header">
+                <p style="position: absolute;top: 2px;left: 17px; color: aliceblue; font: 16px Microsoft YaHei;">
+                    <i class="icon icon-user"></i> 用户名：<span id="username"></span>
+                </p>
+
+                <a class="navbar-brand" href="#" id="exit">
+
+                    <i class="icon icon-info"></i> 退出登录
+                </a>
+
+                <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a href="#">
+                    <img src="./imgs/jing.png" alt="logo" style="width: 45px;height: 45px;    margin-bottom: 14px;">
+                </a>
+                <h1 style="color: aliceblue;font-weight: 700;" class="xiongan">雄安新区公安局情报合成作战中心重复报警数据分析平台</h1>
+                <ul class="navbar-nav ml-auto">
+                    <div class="search d7">
+
+                        <input type="text" id="sousuo" placeholder="搜索从这里开始...">
+                        <button type="submit" id="bei"></button>
+
+                    </div>
+                </ul>
+
+
+            </nav>
+        </div>
+
+        <div class="main-container">
+            <div class="sidebar">
+                <nav class="sidebar-nav">
+                    <ul class="nav">
+                        <!-- <li class="nav-title">Navigation</li> -->
+
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link ">
+                                <i class="icon icon-speedometer"></i> 警情监测
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="forms.html" class="nav-link">
+                                <i class="icon icon-puzzle"></i> 案件分析
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-item">
+                                                                        <a href="tables.html" class="nav-link ">
+                                                                            <i class="icon icon-grid"></i> 数据检索
+                                                                        </a>
+                                                                    </li> -->
+                        <li class="nav-item">
+                            <a href="chartjs.html" class="nav-link ">
+                                <i class="icon icon-pin"></i> 警情图谱
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="alerts.html" class="nav-link">
+                                <i class="icon icon-film"></i> 警情分析
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="blank.html" class="nav-link ">
+                                <i class="icon icon-docs"></i> 警情统计
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="settings.html" class="nav-link ">
+                                <i class="icon icon-calculator"></i> 数据导出
+                            </a>
+                        </li>
+                        <li class="nav-item nav-dropdown">
+                            <a href="#" class="nav-link nav-dropdown-toggle ">
+                                <i class="icon icon-umbrella"></i>后台管理<i class="fa fa-caret-left"></i>
+                            </a>
+
+                            <ul class="nav-dropdown-items">
+                                <li class="nav-item">
+                                    <a href="cards.html" class="nav-link  ">
+                                        <i class="icon icon-umbrella"></i>用户管理
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="buttons.html" class="nav-link ">
+                                        <i class="icon icon-umbrella"></i>用户日志
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="tabs.html" class="nav-link ">
+                                        <i class="icon icon-umbrella"></i>搜索记录
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="register.html" class="nav-link">
+                                        <i class="icon icon-umbrella"></i>导出记录
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="content">
+                <div class="row">
+                    <div class="col-12 dl">
+                        <p><a href="./index.html">警情监测</a>
+                            << 案件详情</p>
+                    </div>
+                </div>
+                <!-- 基本信息 -->
+                <div class="row">
+                    <div class="col-4 hl">
+                        <div class="div">
+                            <span class="q1"></span>
+                            <span>基本信息</span>
+
+                        </div>
+                        <p>警情序号&nbsp;: <span id="title"></span></p>
+                        <p>警情级别&nbsp;: <span id="nub"></span></p>
+                    </div>
+                    <div class="col-4 hl mj">
+
+                        <p class="p1">出警派出所&nbsp;: <span id="local"></span></p>
+                        <p class="p2">&nbsp;报警时间&nbsp;: <span id="time"></span></p>
+                    </div>
+                    <div class="col-4 hl kl">
+                        <button id="export">案件详情导出</button>
+                    </div>
+                </div>
+                <!-- 警情详情 -->
+                <div class="row">
+                    <div class="col-12 ll">
+                        <div class="div">
+                            <span class="q1"></span>
+                            <span>警情详情</span>
+                        </div>
+                        <div class="col-12 za">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- 反馈内容 -->
+                <div class="row">
+                    <div class="col-12 ql">
+                        <div class="div">
+                            <span class="q1"></span>
+                            <span>反馈内容</span>
+                        </div>
+                        <div class="box-1">
+                            <div class="title">
+
+                                <div>
+                                    <div class="investment_f">
+                                        <div class="investment_title">
+                                        </div>
+                                        <div class="investment_con">
+                                            <!-- 核查内容 -->
+                                            <div class="lists">
+                                                <table class="table-striped table-bordered table-hover" id="demo"
+                                                    lay-filter="demo">
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 重复警情 -->
+                <div class="row">
+                    <div class="col-12 wl">
+                        <div class="div">
+                            <span class="q1"></span>
+                            <span>重复警情</span>
+                            <!-- <span style="float: right;">
+                                相似度：<select name="" id="sel">
+                                    <option value="0.1">10%</option>
+                                    <option value="0.2">20%</option>
+                                    <option value="0.3">30%</option>
+                                    <option value="0.4">40%</option>
+                                    <option value="0.5">50%</option>
+                                    <option value="0.6">60%</option>
+                                    <option value="0.7">70%</option>
+                                    <option value="0.8">80%</option>
+                                    <option value="0.9">90%</option>
+                                    <option value="1">100%</option>
+
+                                </select>
+                                <button id="bba">刷新</button>
+                            </span> -->
+                        </div>
+                        <div class="box-2">
+                            <div class="title">
+                                <div>
+                                    <div class="investment_f">
+                                        <div class="investment_title">
+                                        </div>
+                                        <div class="investment_con">
+                                            <!-- 核查内容 -->
+                                            <div class="lists">
+                                                <table class="table-striped table-bordered table-hover" id="demo-c"
+                                                    lay-filter="demo">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 相似警情 -->
+                <div class="row">
+                    <div class="col-12 wl">
+                        <div class="div">
+                            <span class="q1"></span>
+                            <span>相似警情</span>
+                            <!-- <span style="float: right;">
+                                相似度：<select name="" id="sel-1">
+                                    <option value="0.1">10%</option>
+                                    <option value="0.2">20%</option>
+                                    <option value="0.3">30%</option>
+                                    <option value="0.4">40%</option>
+                                    <option value="0.5">50%</option>
+                                    <option value="0.6">60%</option>
+                                    <option value="0.7">70%</option>
+                                    <option value="0.8">80%</option>
+                                    <option value="0.9">90%</option>
+                                    <option value="1">100%</option>
+                                </select>
+                                <button id="bba-1">刷新</button>
+                            </span> -->
+                        </div>
+                        <div class="box-3">
+                            <div class="title">
+                                <div>
+                                    <div class="investment_f">
+                                        <div class="investment_title">
+                                        </div>
+                                        <div class="investment_con">
+                                            <!-- 核查内容 -->
+                                            <div class="lists">
+                                                <table class="table-striped table-bordered table-hover" id="demm"
+                                                    lay-filter="demo">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 历史警情 -->
+                <div class="row">
+                    <div class="col-12 wl">
+                        <div class="div">
+                            <span class="q1"></span>
+                            <span>历史警情</span>
+                            <span style="float: right;">
+                                <button id="bba-3">查看本区</button>
+                                <button id="bba-2">查看本市</button>
+                            </span>
+                        </div>
+                        <div class="box-4">
+                            <div class="title">
+                                <div>
+                                    <div class="investment_f">
+                                        <div class="investment_title">
+                                        </div>
+                                        <div class="investment_con">
+                                            <!-- 核查内容 -->
+                                            <div class="lists">
+                                                <table class="table-striped table-bordered table-hover" id="demq"
+                                                    lay-filter="demq">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 案件信息可视化 -->
+                <div class="row">
+                    <div class="col-12 wl-1">
+                        <div class="div">
+                            <span class="q1"></span>
+                            <span>案件信息可视化</span>
+                        </div>
+                        <div id="huhu" style="width: 100%;height: 520px;"></div>
+                    </div>
+                </div>
+                <!-- 隐藏狂 -->
+
+                <div class="boo" id="boos" style="display: none;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./vendor/jquery/jquery.min.js"></script>
+    <script src="./vendor/popper.js/popper.min.js"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./layui/layui.all.js"></script>
+    <script src="./js/carbon.js"></script>
+    <script src="./js/bashpath.js"></script>
+    <script src="./js/echarts.js"></script>
+    <script>
+        $("#exit").on("click", function () {  //将退出按钮的id设置为exit，然后将这个函数在公共文件里面即可
+            if (confirm('系统提示，您确定要退出本次登录吗?')) {
+                //  session.removeAttribute(username);
+                sessionStorage.removeItem("username")
+                //  sessionStorage.removeItem(limit)
+                location.href = './login.html';
+            }
+        })
+        // 判断session是否存在
+        if (se == null) {
+
+            window.location.href = "./login.html";
+
+        }
+        $('#bei').click(function () {
+            var t = $("#sousuo").val();
+
+            if (t == null || t == undefined || t == '') {
+                layer.msg('搜索内容不可以为空')
+                console.log("value 为空")
+            } else {
+                var t = encodeURI(encodeURI(t));
+                console.log(t)
+                var url = "./tables.html?t=" + t + "&username=" + se;
+                window.location.href = url;
+            }
+
+        })
+        function getQueryString(name) {
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }
+        var idd = getQueryString(name = "id")
+        var sentence;
+        var bjh;
+        var djk;
+        var jq;
+        console.log(idd)
+        Similar();
+
+        $('#export').click(function () {
+            //    window.location.href='http://172.16.1.172:8080/NewSimilar/Details/export?id='+idd
+            window.open(basePath + "/Details/export?id=" + idd + "&username=" + se)
+        })
+
+        $.ajax({
+            type: "post",
+            url: basePath + "/Details/DetailsID",
+            async: false,
+            xhrFields: {
+                withCredentials: true
+            },
+            data: {
+                id: idd,
+            },
+            // contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: function (res) {
+                console.log(res)
+                $('#title').html(res.jqxh)
+                $('#nub').html(res.jqjb)
+                $('#local').html(res.cjpcs)
+                $('#time').html(res.bjsj)
+                $('.za').html(res.jqzy)
+                sentence = res.jqzy;
+                bjh = res.bjr;
+                djk = res.bjdh;
+                jq = res.jqbt;
+            }
+        });
+        console.log(sentence)
+        Repetition()
+        similarit()
+        historyB();
+        analyze(idd, jq);
+        // 反馈内容
+        function Similar() {
+
+            // console.log(idd)
+            //获取查询时间与查询内容
+            var userId = $("#userId").val();
+            var createDate = $("#time").val();
+            var status = $("#ervFonr-1 option:selected").val();
+            var documentName = $("#name").val();
+            layui.use(['table', 'layer', 'laydate', 'laypage', 'util'], function () {
+                var $ = layui.$,
+                    table = layui.table,
+                    layer = layui.layer,
+                    laydate = layui.laydate;
+                var laypage = layui.laypage;
+                var util = layui.util;
+                $.ajaxSetup({
+                    xhrFields: {
+                        withCredentials: true
+                    }
+                });
+                //自定义格式
+                laydate.render({
+                    elem: '#demo',
+                    format: 'yyyy/MM/dd',
+                    range: true,
+                    theme: '#ff7f4f',
+                    done: function (value, date, endDate) {
+                        $("#time").val(value);
+                        table.reload('demo', {
+                            url: basePath + '/Details/FK',
+                            where: { //设定异步数据接口的额外参数，任意设
+                                limitName: '15',
+                                pageName: '1',
+                                // userId:userId,
+                                createDate: value,
+                                status: "",
+                                documentName: "",
+                                id: idd
+                            }
+                        });
+                    }
+                });
+
+
+
+                table.render({
+                    elem: '#demo',
+                    page: {
+                        theme: '#ff7f4f',
+
+                    },
+
+                    page: false,
+                    // limits: [5, 10, 15], //显示
+                    limit: 15,//每页默认显示的数量
+                    where: {
+                        // userId:userId,
+                        // createDate: createDate,
+                        day: status,
+                        id: idd,
+
+                        // likeName: documentName,
+                        // time: time
+                    } //如果无需传递额外参数，可不加该参数
+                    ,
+                    url: basePath + '/Details/FK',
+                    cols: [
+                        [
+                            // { type: 'checkbox', width: 100, fixed: 'left', align: 'center' }
+                            , {
+                                title: '序号',
+                                align: 'center',
+                                type: 'numbers',
+                                // sort: true,
+                                width: 80
+                            },
+                            {
+                                title: '警情序号',
+                                field: 'jQID',
+                                align: 'center',
+                                // toolbar: "#barDemo"
+                                // type: 'numbers',
+                                // sort: true,
+
+                            }, {
+                                field: 'fKDWMC',
+                                title: '单位名称',
+                                width: "20%",
+                                align: 'center'
+                            }, {
+                                field: 'fKNR',
+                                width: "25%",
+                                title: '反馈内容',
+                                align: 'center',
+                                template: '#titleTpl'
+                            },
+                            // {
+                            //     field: 'cJPCS',
+                            //     width: "15%",
+                            //     title: '出警派出所',
+                            //     align: 'center',
+                            //     // template: '#titleTpl'
+                            // },
+                            // {
+                            //     field: 'counts',
+                            //     width: 200,
+                            //     title: '上传用户',
+                            //     align: 'center',
+                            //     template: '#titleTpl'
+                            // },
+                            {
+                                field: 'fKSJ', width: "20%", title: '反馈时间', align: 'center', templet: "<div>{{layui.util.toDateString(d.bJSJ, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                            }
+                            ,
+                            // , { field: 'status', width: 213, title: '状态', align: 'center' }
+                            // , { field: 'uploadDate', width: 170, title: '上传时间', align: 'center' }
+                            // , { width: 283, title: '操作', align: 'center', toolbar: "#barDemo" }
+
+                        ]
+                    ],
+                    done: function (res, curr, count) {
+
+                        $('th').css({
+                            'background-color': '#ed6a1a',
+                            'color': '#fff',
+                            'font-weight': 'bold'
+                        })
+                    },
+                    parseData: function (res) { //res 即为原始返回的数据
+                        //    console.log(res.data.pageList[name])
+
+                        return {
+                            "code": res.status, //解析接口状态
+                            "msg": res.message, //解析提示文本
+                            "count": res.totalCount, //解析数据长度
+                            "data": res.result //解析数据列表
+                        };
+                    },
+                    request: {
+                        pageName: 'pageNo' //页码的参数名称，默认：page
+                        ,
+                        // limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    }
+
+                });
+
+                //监听表格复选框选择
+                table.on('checkbox(demo)', function (obj) {
+                    console.log(obj);
+                });
+
+                //监听工具条
+                table.on('tool(demo)', function (obj) {
+                    var data = obj.data;
+                    console.log(data)
+                    if (obj.event === 'detail') {
+                        if (data.status == '解析失败') {
+                            layer.msg('此文件解析失败，无法查看明细', {
+                                time: 1800,
+                                icon: 2
+                            });
+                        } else {
+                            var time = obj.data.time;
+                            var uuid = obj.data.uuid
+                            console.log(time)
+                            console.log(uuid)
+                            var url = "../templates/fllow.html?time=" + time + "&uuid=" + uuid;
+
+                            window.location.href = url;
+                        }
+
+                    } else if (obj.event === 'del') {
+                        layer.confirm('确认删除？', {
+                            btn: ['确定', '取消'],
+                            btn1: function (index, layero) {
+                                //后台执行删除操作
+                                $.post(basePath + '/eye/delete', {
+                                    'docId': data.id
+                                }, function (data) {
+                                    if (data.status == 1) {
+                                        layer.msg("删除成功", {
+                                            time: 1800,
+                                            icon: 1
+                                        });
+                                        loadList();
+                                    } else {
+                                        layer.msg('删除失败', {
+                                            time: 1800,
+                                            icon: 2
+                                        });
+                                    }
+                                }, 'json');
+                                layer.close(index);
+                            },
+                            btn2: function (index, layero) {
+                                layer.close(index);
+                            }
+                        });
+                    } else if (obj.event === 'edit') {
+                        if (data.status == '已修改' || (data.status == '核查完成' && data.errorCount == '0')) {
+                            $.post('/eye/get-down', {
+                                'docId': data.id
+                            }, function (data, status) {
+                                if (data == 'false') {
+                                    layer.msg('下载失败', {
+                                        time: 1800,
+                                        icon: 2
+                                    });
+                                } else {
+                                    data = JSON.parse(data);
+                                    window.location.href = basePath + "/eye/down-file/" + data.downkey +
+                                        "/" + data.docId;
+                                }
+                            });
+                        } else {
+                            layer.msg('此文件不可以下载', {
+                                time: 1800,
+                                icon: 2
+                            });
+                        }
+                    }
+                });
+
+            });
+        };
+        // 重复警情
+        function Repetition() {
+            // console.log(idd)
+            //  console.log(sentence)
+            //获取查询时间与查询内容
+            var userId = $("#userId").val();
+            var createDate = $("#time").val();
+            var status = $("#sel option:selected").val();
+            var documentName = $("#name").val();
+            layui.use(['table', 'layer', 'laydate', 'laypage', 'util'], function () {
+                var $ = layui.$,
+                    table = layui.table,
+                    layer = layui.layer,
+                    laydate = layui.laydate;
+                var laypage = layui.laypage;
+                var util = layui.util;
+                $.ajaxSetup({
+                    xhrFields: {
+                        withCredentials: true
+                    }
+                });
+                //自定义格式
+                laydate.render({
+                    elem: '#demo',
+                    format: 'yyyy/MM/dd',
+                    range: true,
+                    theme: '#ff7f4f',
+                    done: function (value, date, endDate) {
+                        $("#time").val(value);
+                        table.reload('demo-c', {
+                            url: basePath + '/Details/CFList',
+                            where: { //设定异步数据接口的额外参数，任意设
+                                limitName: '5',
+                                pageName: '1',
+                                // userId:userId,
+                                createDate: value,
+                                status: "0",
+                                documentName: "",
+                                id: idd
+                            }
+                        });
+                    }
+                });
+
+
+
+                table.render({
+                    elem: '#demo-c',
+                    page: {
+                        theme: '#ff7f4f',
+                    },
+
+                    page: true,
+                    // limits: [5, 10, 15], //显示
+                    limit: 5,//每页默认显示的数量
+                    where: {
+                        // userId:userId,
+                        // createDate: createDate,
+                        sim: status,
+                        id: idd,
+                        sentence: sentence
+
+                        // likeName: documentName,
+                        // time: time
+                    } //如果无需传递额外参数，可不加该参数
+                    ,
+                    url: basePath + '/Details/CFList',
+                    cols: [
+                        [
+                            // { type: 'checkbox', width: 100, fixed: 'left', align: 'center' }
+                            , {
+                                title: '序号',
+                                align: 'center',
+                                type: 'numbers',
+                                // sort: true,
+                                width: 80
+                            },
+                            {
+                                title: '警情序号',
+                                field: 'jQID',
+                                align: 'center',
+                                // toolbar: "#barDemo"
+                                // type: 'numbers',
+                                // sort: true,
+
+                            }, {
+                                field: 'cJFJ',
+                                title: '单位名称',
+                                width: "20%",
+                                align: 'center'
+                            }, {
+                                field: 'jQZY',
+                                width: "25%",
+                                title: '内容',
+                                align: 'center',
+                                template: '#titleTpl'
+                            },
+                            // {
+                            //     field: 'cJPCS',
+                            //     width: "15%",
+                            //     title: '出警派出所',
+                            //     align: 'center',
+                            //     // template: '#titleTpl'
+                            // },
+                            // {
+                            //     field: 'counts',
+                            //     width: 200,
+                            //     title: '上传用户',
+                            //     align: 'center',
+                            //     template: '#titleTpl'
+                            // },
+                            {
+                                field: 'fKSJ', width: "20%", title: '时间', align: 'center', templet: "<div>{{layui.util.toDateString(d.bJSJ, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                            }
+                            ,
+                            // , { field: 'status', width: 213, title: '状态', align: 'center' }
+                            // , { field: 'uploadDate', width: 170, title: '上传时间', align: 'center' }
+                            // , { width: 283, title: '操作', align: 'center', toolbar: "#barDemo" }
+
+                        ]
+                    ],
+                    done: function (res, curr, count) {
+
+                        $('th').css({
+                            'background-color': '#ed6a1a',
+                            'color': '#fff',
+                            'font-weight': 'bold'
+                        })
+                    },
+                    parseData: function (res) { //res 即为原始返回的数据
+                        //    console.log(res.data.pageList[name])
+
+                        return {
+                            "code": res.status, //解析接口状态
+                            "msg": res.message, //解析提示文本
+                            "count": res.totalCount, //解析数据长度
+                            "data": res.pagedList //解析数据列表
+                        };
+                    },
+                    request: {
+                        pageName: 'pageNo' //页码的参数名称，默认：page
+                        ,
+                        // limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    }
+
+                });
+
+                //监听表格复选框选择
+                table.on('checkbox(demo-c)', function (obj) {
+                    console.log(obj);
+                });
+
+                //监听工具条
+                table.on('tool(demo-c)', function (obj) {
+                    var data = obj.data;
+                    console.log(data)
+                    if (obj.event === 'detail') {
+                        if (data.status == '解析失败') {
+                            layer.msg('此文件解析失败，无法查看明细', {
+                                time: 1800,
+                                icon: 2
+                            });
+                        } else {
+                            var time = obj.data.time;
+                            var uuid = obj.data.uuid
+                            console.log(time)
+                            console.log(uuid)
+                            var url = "../templates/fllow.html?time=" + time + "&uuid=" + uuid;
+
+                            window.location.href = url;
+                        }
+
+                    } else if (obj.event === 'del') {
+                        layer.confirm('确认删除？', {
+                            btn: ['确定', '取消'],
+                            btn1: function (index, layero) {
+                                //后台执行删除操作
+                                $.post(basePath + '/eye/delete', {
+                                    'docId': data.id
+                                }, function (data) {
+                                    if (data.status == 1) {
+                                        layer.msg("删除成功", {
+                                            time: 1800,
+                                            icon: 1
+                                        });
+                                        loadList();
+                                    } else {
+                                        layer.msg('删除失败', {
+                                            time: 1800,
+                                            icon: 2
+                                        });
+                                    }
+                                }, 'json');
+                                layer.close(index);
+                            },
+                            btn2: function (index, layero) {
+                                layer.close(index);
+                            }
+                        });
+                    } else if (obj.event === 'edit') {
+                        if (data.status == '已修改' || (data.status == '核查完成' && data.errorCount == '0')) {
+                            $.post('/eye/get-down', {
+                                'docId': data.id
+                            }, function (data, status) {
+                                if (data == 'false') {
+                                    layer.msg('下载失败', {
+                                        time: 1800,
+                                        icon: 2
+                                    });
+                                } else {
+                                    data = JSON.parse(data);
+                                    window.location.href = basePath + "/eye/down-file/" + data.downkey +
+                                        "/" + data.docId;
+                                }
+                            });
+                        } else {
+                            layer.msg('此文件不可以下载', {
+                                time: 1800,
+                                icon: 2
+                            });
+                        }
+                    }
+                });
+
+            });
+        };
+        $("#bba").click(function () {
+            Repetition()
+        })
+        $("#bba-1").click(function () {
+            similarit()
+        })
+        $("#bba-2").click(function () {
+            historyA()
+        })
+        $("#bba-3").click(function () {
+            historyB()
+        })
+        // 相似警情
+        function similarit() {
+            var userId = $("#userId").val();
+            var createDate = $("#time").val();
+            var status = $("#sel-1 option:selected").val();
+            var documentName = $("#name").val();
+            layui.use(['table', 'layer', 'laydate', 'laypage', 'util'], function () {
+                var $ = layui.$,
+                    table = layui.table,
+                    layer = layui.layer,
+                    laydate = layui.laydate;
+                var laypage = layui.laypage;
+                var util = layui.util;
+                $.ajaxSetup({
+                    xhrFields: {
+                        withCredentials: true
+                    }
+                });
+                //自定义格式
+                laydate.render({
+                    elem: '#demm',
+                    format: 'yyyy/MM/dd',
+                    range: true,
+                    theme: '#ff7f4f',
+                    done: function (value, date, endDate) {
+                        $("#time").val(value);
+                        table.reload('demo-0', {
+                            url: basePath + '/Details/XSList',
+                            where: { //设定异步数据接口的额外参数，任意设
+                                limitName: '5',
+                                pageName: '1',
+                                // userId:userId,
+                                createDate: value,
+                                status: "",
+                                documentName: "",
+                                id: idd
+                            }
+                        });
+                    }
+                });
+
+
+
+                table.render({
+                    elem: '#demm',
+                    page: {
+                        theme: '#ff7f4f',
+                    },
+
+                    page: true,
+                    // limits: [5, 10, 15], //显示
+                    limit: 5,//每页默认显示的数量
+                    where: {
+                        // userId:userId,
+                        // createDate: createDate,
+                        sim: status,
+                        id: idd,
+                        sentence: sentence
+
+                        // likeName: documentName,
+                        // time: time
+                    } //如果无需传递额外参数，可不加该参数
+                    ,
+                    url: basePath + '/Details/XSList',
+                    cols: [
+                        [
+                            // { type: 'checkbox', width: 100, fixed: 'left', align: 'center' }
+                            , {
+                                title: '序号',
+                                align: 'center',
+                                type: 'numbers',
+                                // sort: true,
+                                width: 80
+                            },
+                            {
+                                title: '警情序号',
+                                field: 'jQXH',
+                                align: 'center',
+                                // toolbar: "#barDemo"
+                                // type: 'numbers',
+                                // sort: true,
+
+                            }, {
+                                field: 'cJFJ',
+                                title: '单位名称',
+                                width: "20%",
+                                align: 'center'
+                            }, {
+                                field: 'jQZY',
+                                width: "25%",
+                                title: '内容',
+                                align: 'center',
+                                template: '#titleTpl'
+                            },
+                            // {
+                            //     field: 'cJPCS',
+                            //     width: "15%",
+                            //     title: '出警派出所',
+                            //     align: 'center',
+                            //     // template: '#titleTpl'
+                            // },
+                            // {
+                            //     field: 'counts',
+                            //     width: 200,
+                            //     title: '上传用户',
+                            //     align: 'center',
+                            //     template: '#titleTpl'
+                            // },
+                            {
+                                field: 'bJSJ', width: "20%", title: '时间', align: 'center', templet: "<div>{{layui.util.toDateString(d.bJSJ, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                            }
+                            ,
+                            // , { field: 'status', width: 213, title: '状态', align: 'center' }
+                            // , { field: 'uploadDate', width: 170, title: '上传时间', align: 'center' }
+                            // , { width: 283, title: '操作', align: 'center', toolbar: "#barDemo" }
+
+                        ]
+                    ],
+                    done: function (res, curr, count) {
+
+                        $('th').css({
+                            'background-color': '#ed6a1a',
+                            'color': '#fff',
+                            'font-weight': 'bold'
+                        })
+                    },
+                    parseData: function (res) { //res 即为原始返回的数据
+                        //    console.log(res.data.pageList[name])
+
+                        return {
+                            "code": res.status, //解析接口状态
+                            "msg": res.message, //解析提示文本
+                            "count": res.totalCount, //解析数据长度
+                            "data": res.pagedList //解析数据列表
+                        };
+                    },
+                    request: {
+                        pageName: 'pageNo' //页码的参数名称，默认：page
+                        ,
+                        // limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    }
+
+                });
+
+                //监听表格复选框选择
+                table.on('checkbox(demm)', function (obj) {
+                    console.log(obj);
+                });
+
+                //监听工具条
+                table.on('tool(demm)', function (obj) {
+                    var data = obj.data;
+                    console.log(data)
+                    if (obj.event === 'detail') {
+                        if (data.status == '解析失败') {
+                            layer.msg('此文件解析失败，无法查看明细', {
+                                time: 1800,
+                                icon: 2
+                            });
+                        } else {
+                            var time = obj.data.time;
+                            var uuid = obj.data.uuid
+                            console.log(time)
+                            console.log(uuid)
+                            var url = "../templates/fllow.html?time=" + time + "&uuid=" + uuid;
+
+                            window.location.href = url;
+                        }
+
+                    } else if (obj.event === 'del') {
+                        layer.confirm('确认删除？', {
+                            btn: ['确定', '取消'],
+                            btn1: function (index, layero) {
+                                //后台执行删除操作
+                                $.post(basePath + '/eye/delete', {
+                                    'docId': data.id
+                                }, function (data) {
+                                    if (data.status == 1) {
+                                        layer.msg("删除成功", {
+                                            time: 1800,
+                                            icon: 1
+                                        });
+                                        loadList();
+                                    } else {
+                                        layer.msg('删除失败', {
+                                            time: 1800,
+                                            icon: 2
+                                        });
+                                    }
+                                }, 'json');
+                                layer.close(index);
+                            },
+                            btn2: function (index, layero) {
+                                layer.close(index);
+                            }
+                        });
+                    } else if (obj.event === 'edit') {
+                        if (data.status == '已修改' || (data.status == '核查完成' && data.errorCount == '0')) {
+                            $.post('/eye/get-down', {
+                                'docId': data.id
+                            }, function (data, status) {
+                                if (data == 'false') {
+                                    layer.msg('下载失败', {
+                                        time: 1800,
+                                        icon: 2
+                                    });
+                                } else {
+                                    data = JSON.parse(data);
+                                    window.location.href = basePath + "/eye/down-file/" + data.downkey +
+                                        "/" + data.docId;
+                                }
+                            });
+                        } else {
+                            layer.msg('此文件不可以下载', {
+                                time: 1800,
+                                icon: 2
+                            });
+                        }
+                    }
+                });
+
+            });
+        }
+        // 历史全区警情
+        function historyB() {
+            var userId = $("#userId").val();
+            var createDate = $("#time").val();
+            var status = $("#sel-1 option:selected").val();
+            var documentName = $("#name").val();
+            layui.use(['table', 'layer', 'laydate', 'laypage', 'util'], function () {
+                var $ = layui.$,
+                    table = layui.table,
+                    layer = layui.layer,
+                    laydate = layui.laydate;
+                var laypage = layui.laypage;
+                var util = layui.util;
+                $.ajaxSetup({
+                    xhrFields: {
+                        withCredentials: true
+                    }
+                });
+                //自定义格式
+                laydate.render({
+                    elem: '#demq',
+                    format: 'yyyy/MM/dd',
+                    range: true,
+                    theme: '#ff7f4f',
+                    done: function (value, date, endDate) {
+                        $("#time").val(value);
+                        table.reload('demq', {
+                            url: basePath + '/Details/HistoryBQ',
+                            where: { //设定异步数据接口的额外参数，任意设
+                                limitName: '5',
+                                pageName: '1',
+                                // userId:userId,
+                                createDate: value,
+                                status: "",
+                                documentName: "",
+                                id: idd
+                            }
+                        });
+                    }
+                });
+
+
+
+                table.render({
+                    elem: '#demq',
+                    page: {
+                        theme: '#ff7f4f',
+                    },
+
+                    page: true,
+                    // limits: [5, 10, 15], //显示
+                    limit: 5,//每页默认显示的数量
+                    where: {
+                        // userId:userId,
+                        // createDate: createDate,
+                        // sim: status,
+                        id: idd,
+                        // sentence: sentence
+                        bjr: bjh,
+                        bjdh: djk,
+                        // likeName: documentName,
+                        // time: time
+                    } //如果无需传递额外参数，可不加该参数
+                    ,
+                    url: basePath + '/Details/HistoryBQ',
+                    cols: [
+                        [
+                            // { type: 'checkbox', width: 100, fixed: 'left', align: 'center' }
+                            , {
+                                title: '序号',
+                                align: 'center',
+                                type: 'numbers',
+                                // sort: true,
+                                width: 80
+                            },
+                            {
+                                title: '警情序号',
+                                field: 'jqid',
+                                align: 'center',
+                                // toolbar: "#barDemo"
+                                // type: 'numbers',
+                                // sort: true,
+
+                            }, {
+                                field: 'jqzy',
+                                width: "30%",
+                                title: '内容',
+                                align: 'center',
+                                template: '#titleTpl'
+                            },
+                            // {
+                            //     field: 'cJPCS',
+                            //     width: "15%",
+                            //     title: '出警派出所',
+                            //     align: 'center',
+                            //     // template: '#titleTpl'
+                            // },
+                            // {
+                            //     field: 'counts',
+                            //     width: 200,
+                            //     title: '上传用户',
+                            //     align: 'center',
+                            //     template: '#titleTpl'
+                            // },
+                            {
+                                field: 'bjsj', width: "25%", title: '时间', align: 'center',
+                            }
+                            ,
+                            // , { field: 'status', width: 213, title: '状态', align: 'center' }
+                            // , { field: 'uploadDate', width: 170, title: '上传时间', align: 'center' }
+                            // , { width: 283, title: '操作', align: 'center', toolbar: "#barDemo" }
+
+                        ]
+                    ],
+                    done: function (res, curr, count) {
+
+                        $('th').css({
+                            'background-color': '#ed6a1a',
+                            'color': '#fff',
+                            'font-weight': 'bold'
+                        })
+                    },
+                    parseData: function (res) { //res 即为原始返回的数据
+                        //    console.log(res.data.pageList[name])
+
+                        return {
+                            "code": res.status, //解析接口状态
+                            "msg": res.message, //解析提示文本
+                            "count": res.totalCount, //解析数据长度
+                            "data": res.pageList //解析数据列表
+                        };
+                    },
+                    request: {
+                        pageName: 'pageNo' //页码的参数名称，默认：page
+                        ,
+                        // limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    }
+
+                });
+
+                //监听表格复选框选择
+                table.on('checkbox(demm)', function (obj) {
+                    console.log(obj);
+                });
+
+                //监听工具条
+                table.on('tool(demm)', function (obj) {
+                    var data = obj.data;
+                    console.log(data)
+                    if (obj.event === 'detail') {
+                        if (data.status == '解析失败') {
+                            layer.msg('此文件解析失败，无法查看明细', {
+                                time: 1800,
+                                icon: 2
+                            });
+                        } else {
+                            var time = obj.data.time;
+                            var uuid = obj.data.uuid
+                            console.log(time)
+                            console.log(uuid)
+                            var url = "../templates/fllow.html?time=" + time + "&uuid=" + uuid;
+
+                            window.location.href = url;
+                        }
+
+                    } else if (obj.event === 'del') {
+                        layer.confirm('确认删除？', {
+                            btn: ['确定', '取消'],
+                            btn1: function (index, layero) {
+                                //后台执行删除操作
+                                $.post(basePath + '/eye/delete', {
+                                    'docId': data.id
+                                }, function (data) {
+                                    if (data.status == 1) {
+                                        layer.msg("删除成功", {
+                                            time: 1800,
+                                            icon: 1
+                                        });
+                                        loadList();
+                                    } else {
+                                        layer.msg('删除失败', {
+                                            time: 1800,
+                                            icon: 2
+                                        });
+                                    }
+                                }, 'json');
+                                layer.close(index);
+                            },
+                            btn2: function (index, layero) {
+                                layer.close(index);
+                            }
+                        });
+                    } else if (obj.event === 'edit') {
+                        if (data.status == '已修改' || (data.status == '核查完成' && data.errorCount == '0')) {
+                            $.post('/eye/get-down', {
+                                'docId': data.id
+                            }, function (data, status) {
+                                if (data == 'false') {
+                                    layer.msg('下载失败', {
+                                        time: 1800,
+                                        icon: 2
+                                    });
+                                } else {
+                                    data = JSON.parse(data);
+                                    window.location.href = basePath + "/eye/down-file/" + data.downkey +
+                                        "/" + data.docId;
+                                }
+                            });
+                        } else {
+                            layer.msg('此文件不可以下载', {
+                                time: 1800,
+                                icon: 2
+                            });
+                        }
+                    }
+                });
+
+            });
+        }
+        // 历史全市警情
+        function historyA() {
+            var userId = $("#userId").val();
+            var createDate = $("#time").val();
+            var status = $("#sel-1 option:selected").val();
+            var documentName = $("#name").val();
+            layui.use(['table', 'layer', 'laydate', 'laypage', 'util'], function () {
+                var $ = layui.$,
+                    table = layui.table,
+                    layer = layui.layer,
+                    laydate = layui.laydate;
+                var laypage = layui.laypage;
+                var util = layui.util;
+                $.ajaxSetup({
+                    xhrFields: {
+                        withCredentials: true
+                    }
+                });
+                //自定义格式
+                laydate.render({
+                    elem: '#demq',
+                    format: 'yyyy/MM/dd',
+                    range: true,
+                    theme: '#ff7f4f',
+                    done: function (value, date, endDate) {
+                        $("#time").val(value);
+                        table.reload('demq', {
+                            url: basePath + '/Details/HistoryQS',
+                            where: { //设定异步数据接口的额外参数，任意设
+                                limitName: '5',
+                                pageName: '1',
+                                // userId:userId,
+                                createDate: value,
+                                status: "",
+                                documentName: "",
+                                id: idd
+                            }
+                        });
+                    }
+                });
+
+
+
+                table.render({
+                    elem: '#demq',
+                    page: {
+                        theme: '#ff7f4f',
+                    },
+
+                    page: true,
+                    // limits: [5, 10, 15], //显示
+                    limit: 5,//每页默认显示的数量
+                    where: {
+                        // userId:userId,
+                        // createDate: createDate,
+                        // sim: status,
+                        id: idd,
+                        // sentence: sentence
+                        bjr: bjh,
+                        bjdh: djk,
+                        // likeName: documentName,
+                        // time: time
+                    } //如果无需传递额外参数，可不加该参数
+                    ,
+                    url: basePath + '/Details/HistoryQS',
+                    cols: [
+                        [
+                            // { type: 'checkbox', width: 100, fixed: 'left', align: 'center' }
+                            , {
+                                title: '序号',
+                                align: 'center',
+                                type: 'numbers',
+                                // sort: true,
+                                width: 80
+                            },
+                            {
+                                title: '警情序号',
+                                field: 'jqid',
+                                align: 'center',
+                                // toolbar: "#barDemo"
+                                // type: 'numbers',
+                                // sort: true,
+
+                            }, {
+                                field: 'jqbt',
+                                width: "35%",
+                                title: '内容',
+                                align: 'center',
+                                template: '#titleTpl'
+                            },
+                            // {
+                            //     field: 'cJPCS',
+                            //     width: "15%",
+                            //     title: '出警派出所',
+                            //     align: 'center',
+                            //     // template: '#titleTpl'
+                            // },
+                            // {
+                            //     field: 'counts',
+                            //     width: 200,
+                            //     title: '上传用户',
+                            //     align: 'center',
+                            //     template: '#titleTpl'
+                            // },
+                            {
+                                field: 'bjsj', width: "25%", title: '时间', align: 'center',
+                            }
+                            ,
+                            // , { field: 'status', width: 213, title: '状态', align: 'center' }
+                            // , { field: 'uploadDate', width: 170, title: '上传时间', align: 'center' }
+                            // , { width: 283, title: '操作', align: 'center', toolbar: "#barDemo" }
+
+                        ]
+                    ],
+                    done: function (res, curr, count) {
+
+                        $('th').css({
+                            'background-color': '#ed6a1a',
+                            'color': '#fff',
+                            'font-weight': 'bold'
+                        })
+                    },
+                    parseData: function (res) { //res 即为原始返回的数据
+                        //    console.log(res.data.pageList[name])
+
+                        return {
+                            "code": res.status, //解析接口状态
+                            "msg": res.message, //解析提示文本
+                            "count": res.totalCount, //解析数据长度
+                            "data": res.pageList //解析数据列表
+                        };
+                    },
+                    request: {
+                        pageName: 'pageNo' //页码的参数名称，默认：page
+                        ,
+                        // limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    }
+
+                });
+
+                //监听表格复选框选择
+                table.on('checkbox(demm)', function (obj) {
+                    console.log(obj);
+                });
+
+                //监听工具条
+                table.on('tool(demm)', function (obj) {
+                    var data = obj.data;
+                    console.log(data)
+                    if (obj.event === 'detail') {
+                        if (data.status == '解析失败') {
+                            layer.msg('此文件解析失败，无法查看明细', {
+                                time: 1800,
+                                icon: 2
+                            });
+                        } else {
+                            var time = obj.data.time;
+                            var uuid = obj.data.uuid
+                            console.log(time)
+                            console.log(uuid)
+                            var url = "../templates/fllow.html?time=" + time + "&uuid=" + uuid;
+
+                            window.location.href = url;
+                        }
+
+                    } else if (obj.event === 'del') {
+                        layer.confirm('确认删除？', {
+                            btn: ['确定', '取消'],
+                            btn1: function (index, layero) {
+                                //后台执行删除操作
+                                $.post(basePath + '/eye/delete', {
+                                    'docId': data.id
+                                }, function (data) {
+                                    if (data.status == 1) {
+                                        layer.msg("删除成功", {
+                                            time: 1800,
+                                            icon: 1
+                                        });
+                                        loadList();
+                                    } else {
+                                        layer.msg('删除失败', {
+                                            time: 1800,
+                                            icon: 2
+                                        });
+                                    }
+                                }, 'json');
+                                layer.close(index);
+                            },
+                            btn2: function (index, layero) {
+                                layer.close(index);
+                            }
+                        });
+                    } else if (obj.event === 'edit') {
+                        if (data.status == '已修改' || (data.status == '核查完成' && data.errorCount == '0')) {
+                            $.post('/eye/get-down', {
+                                'docId': data.id
+                            }, function (data, status) {
+                                if (data == 'false') {
+                                    layer.msg('下载失败', {
+                                        time: 1800,
+                                        icon: 2
+                                    });
+                                } else {
+                                    data = JSON.parse(data);
+                                    window.location.href = basePath + "/eye/down-file/" + data.downkey +
+                                        "/" + data.docId;
+                                }
+                            });
+                        } else {
+                            layer.msg('此文件不可以下载', {
+                                time: 1800,
+                                icon: 2
+                            });
+                        }
+                    }
+                });
+
+            });
+        }
+
+
+        function unique(arr, attribute) {
+            var new_arr = [];
+            var json_arr = [];
+            for (var i = 0; i < arr.length; i++) {
+                console.log(new_arr.indexOf(arr[i][attribute]));
+                if (new_arr.indexOf(arr[i][attribute]) == -1) { //  -1代表没有找到
+                    new_arr.push(arr[i][attribute]); //如果没有找到就把这个name放到arr里面，以便下次循环时用
+                    json_arr.push(arr[i]);
+                } else {
+                }
+            }
+            return json_arr;
+        }
+        //详情Echarts图
+        function analyze(idd, jq) {
+            $.ajax({
+                url: basePath + '/Details/analyze',
+                data: {
+                    jqxh: idd,
+                    jqbt: jq,
+                },
+                dataType: "json",
+                type: "POST",
+                success: function (data) {
+                    var list = {};
+                    var arr = data.LM;
+                    for (var key in arr) {
+                        list[key] = arr[key];
+                    }
+                    var myChart = echarts.init(document
+                        .getElementById('huhu'));
+                    var categories = [];
+                    for (var i in list) {
+                        categories[i] = {
+                            name: list[i]
+                        };
+                    }
+                    option = {
+                        // 图的标题
+                        // title: {
+                        //     text: '案件分析关系图'
+                        // },
+                        // 提示框的配置
+                        tooltip: {
+                            formatter: function (x) {
+                                return x.data.des;
+                            }
+                        },
+                        // 工具箱
+                        toolbox: {
+                            // 显示工具箱
+                            show: true,
+                            feature: {
+                                mark: {
+                                    show: true
+                                },
+                                // 还原
+                                restore: {
+                                    show: true
+                                },
+                                // 保存为图片
+                                saveAsImage: {
+                                    show: true
+                                }
+                            }
+                        },
+                        legend: [{
+                            // selectedMode: 'single',
+                            data: categories.map(function (a) {
+                                return a.name;
+                            }),
+                            textStyle: {
+                                color: '#0ea6b4'
+                            }
+                        }],
+                        series: [{
+                            type: 'graph', // 类型:关系图
+                            layout: 'force', //图的布局，类型为力导图
+                            symbolSize: 40, // 调整节点的大小
+                            roam: true, // 是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移,可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+                            edgeSymbol: ['circle', 'arrow'],
+                            edgeSymbolSize: [2, 10],
+                            edgeLabel: {
+                                normal: {
+                                    textStyle: {
+                                        fontSize: 20
+                                    }
+                                }
+                            },
+                            force: {
+                                repulsion: 2500,
+                                edgeLength: [10, 50]
+                            },
+                            draggable: true,
+                            lineStyle: {
+                                normal: {
+                                    width: 2,
+                                    color: '#4b565b',
+                                }
+                            },
+                            edgeLabel: {
+                                normal: {
+                                    show: true,
+                                    formatter: function (x) {
+                                        return x.data.name;
+                                    }
+                                }
+                            },
+                            label: {
+                                normal: {
+                                    show: true,
+                                    textStyle: {}
+                                }
+                            },
+
+                            // 数据
+                            data: unique(data.Data, "name"),
+                            links: data.Links,
+                            categories: categories,
+                        }]
+                    };
+                    myChart.setOption(option);
+                    var data = myChart._model.option.series[0].data;
+                    console.log(data)
+
+                    //    for (var i = 0; i < data.length; i++) {
+                    //         console.log(data[i].category);
+                    //         var item = data[i].category
+                    //         if (item == 2) {
+                    //         }
+                    //     }
+
+                    myChart.on("click", function (chartParam) {
+                        var coj = data[chartParam.dataIndex].category
+                        var name = data[chartParam.dataIndex].name
+                      console.log(coj)
+                        // var index = $(this).index();
+                        // console.log(index)
+                        // console.log($(this))
+                        if(coj === 2) {
+                        // alert(data[chartParam.dataIndex].name);
+                         $.ajax({
+                            url: basePath + '/Search/Search',
+                            data: {
+                                jqxh: idd,
+                                content: name,
+                            },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
+                                  layer.open({
+                                    type: 1,
+                                    title: '关系图' //不显示标题栏
+                                    , closeBtn: 1,
+                                    area: ['800px', '600px'],
+                                    shade: 0.8,
+                                    btnAlign: 'c',
+                                    moveType: 1 //拖拽模式，0或者1
+                                    ,
+
+                                    content: '<div style=" width: 100%; height:100%; background-color: #193989; color: #393D49; font-weight: 300;" id = "boo"> ' +
+
+                                        '</div>'
+
+                                    ,
+                                    success: function () {
+                                        console.log("1111")
+                                         var list = {};
+                                        var arr = data.LM;
+                                        console.log(data.Data)
+                                        for (var key in arr) {
+                                            list[key] = arr[key];
+                                        }
+                                        var myCharts = echarts.init(document
+                                            .getElementById('boo'));
+                                        var categories = [];
+                                        for (var i in list) {
+                                            categories[i] = {
+                                                name: list[i]
+                                            };
+                                        }
+                                        option = {
+                                            // 图的标题
+                                            // title: {
+                                            //     text: '案件分析关系图'
+                                            // },
+                                            // 提示框的配置
+                                            tooltip: {
+                                                formatter: function (x) {
+                                                    return x.data.des;
+                                                }
+                                            },
+                                            // 工具箱
+                                            toolbox: {
+                                                // 显示工具箱
+                                                show: true,
+                                                feature: {
+                                                    mark: {
+                                                        show: true
+                                                    },
+                                                    // 还原
+                                                    restore: {
+                                                        show: true
+                                                    },
+                                                    // 保存为图片
+                                                    saveAsImage: {
+                                                        show: true
+                                                    }
+                                                }
+                                            },
+                                            legend: [{
+                                                // selectedMode: 'single',
+                                                data: categories.map(function (a) {
+                                                    return a.name;
+                                                }),
+                                                textStyle: {
+                                                    color: '#0ea6b4'
+                                                }
+                                            }],
+                                            series: [{
+                                                type: 'graph', // 类型:关系图
+                                                layout: 'force', //图的布局，类型为力导图
+                                                symbolSize: 40, // 调整节点的大小
+                                                roam: true, // 是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移,可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+                                                edgeSymbol: ['circle', 'arrow'],
+                                                edgeSymbolSize: [2, 10],
+                                                edgeLabel: {
+                                                    normal: {
+                                                        textStyle: {
+                                                            fontSize: 20
+                                                        }
+                                                    }
+                                                },
+                                                force: {
+                                                    repulsion: 2500,
+                                                    edgeLength: [10, 50]
+                                                },
+                                                draggable: true,
+                                                lineStyle: {
+                                                    normal: {
+                                                        width: 2,
+                                                        color: '#4b565b',
+                                                    }
+                                                },
+                                                edgeLabel: {
+                                                    normal: {
+                                                        show: true,
+                                                        formatter: function (x) {
+                                                            return x.data.name;
+                                                        }
+                                                    }
+                                                },
+                                                label: {
+                                                    normal: {
+                                                        show: true,
+                                                        textStyle: {}
+                                                    }
+                                                },
+
+                                                // 数据
+                                                data: unique(data.Data, "name"),
+                                                links: data.Links,
+                                                categories: categories,
+                                            }]
+                                        };
+                                        myCharts.setOption(option);
+
+                                    }
+                                });
+                               
+
+
+                            }
+                        });
+                      }
+                    });
+
+
+                    //  var res = data.map(item => item.category);
+                    // var res = data.forEach(item => item.category);
+                    // console.log(res)
+                    // res.forEach((item, index) => {
+                    //     console.log(item);
+
+                    // })
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,818 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>案件分析</title>
+    <link rel="stylesheet" href="./vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="./vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./css/table.css">
+
+</head>
+
+<body class="sidebar-fixed header-fixed">
+    <div class="page-wrapper">
+        <nav class="navbar page-header">
+            <p style="position: absolute;top: 2px;left: 17px; color: aliceblue; font: 16px Microsoft YaHei;">
+                <i class="icon icon-user"></i> 用户名：<span id="username"></span>
+            </p>
+
+            <a class="navbar-brand" href="#" id="exit">
+
+                <i class="icon icon-info"></i> 退出登录
+            </a>
+
+            <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">
+                <i class="fa fa-bars"></i>
+            </a>
+            <a href="#">
+                <img src="./imgs/jing.png" alt="logo" style="width: 45px;height: 45px;    margin-bottom: 14px;">
+            </a>
+            <h1 style="color: aliceblue;font-weight: 700;" class="xiongan">雄安新区公安局情报合成作战中心重复报警数据分析平台</h1>
+            <ul class="navbar-nav ml-auto">
+                <div class="search d7">
+                    <input type="text" id="sousuo">
+                    <button type="submit" id="bei"></button>
+                </div>
+            </ul>
+
+
+        </nav>
+        <div class="main-container">
+            <div class="sidebar">
+                <nav class="sidebar-nav">
+                    <ul class="nav">
+                        <!-- <li class="nav-title">Navigation</li> -->
+
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link ">
+                                <i class="icon icon-speedometer"></i> 警情监测
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="forms.html" class="nav-link active">
+                                <i class="icon icon-puzzle"></i> 案件分析
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-item">
+                                                                        <a href="tables.html" class="nav-link ">
+                                                                            <i class="icon icon-grid"></i> 数据检索
+                                                                        </a>
+                                                                    </li> -->
+                        <li class="nav-item">
+                            <a href="chartjs.html" class="nav-link ">
+                                <i class="icon icon-pin"></i> 警情图谱
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="alerts.html" class="nav-link">
+                                <i class="icon icon-film"></i> 警情分析
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="blank.html" class="nav-link ">
+                                <i class="icon icon-docs"></i> 警情统计
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="settings.html" class="nav-link ">
+                                <i class="icon icon-calculator"></i> 数据导出
+                            </a>
+                        </li>
+                        <li class="nav-item nav-dropdown">
+                            <a href="#" class="nav-link nav-dropdown-toggle ">
+                                <i class="icon icon-umbrella"></i>后台管理<i class="fa fa-caret-left"></i>
+                            </a>
+
+                            <ul class="nav-dropdown-items">
+                                <li class="nav-item">
+                                    <a href="cards.html" class="nav-link  ">
+                                        <i class="icon icon-umbrella"></i>用户管理
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="buttons.html" class="nav-link ">
+                                        <i class="icon icon-umbrella"></i>用户日志
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="tabs.html" class="nav-link ">
+                                        <i class="icon icon-umbrella"></i>搜索记录
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="register.html" class="nav-link">
+                                        <i class="icon icon-umbrella"></i>导出记录
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </nav>
+            </div>
+            <div class="content">
+                <div class="row clearfix">
+                    <div class="col-12 dl">
+                        <p>案件分析</p>
+                    </div>
+
+                    <!-- <div class="col-sm-3 tl">
+                        <div class="div">
+                            <span class="q1"></span>
+                            <span>警情查询</span>
+
+                        </div>
+                        <div class="led-1">
+
+                            <div class="div">
+                                <label class="layui-form-label">开始时间</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" id="test1" placeholder="请选择日期">
+                                </div>
+                            </div>
+                            <div class="div">
+                                <label class="layui-form-label">结束时间</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" id="test2" placeholder="请选择日期">
+                                </div>
+                            </div>
+                            <div class="div1">
+                                <button>查询</button>
+                            </div>
+                        </div>
+                        <div class="div">
+                            <span class="q1"></span>
+                            <span>警情监测</span>
+
+                        </div>
+                        <div class="led-1">
+
+                            <div class="div">
+                                <label class="layui-form-label">开始时间</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" id="test3" placeholder="请选择日期">
+                                </div>
+                            </div>
+                            <div class="div">
+                                <label class="layui-form-label">结束时间</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" id="test4" placeholder="请选择日期">
+                                </div>
+                            </div>
+                            <div class="div1">
+                                <button>计算</button>
+                            </div>
+                        </div>
+
+                        <div class="led-1">
+                            <button class="btn1">查看全部数据</button>
+                            <button class="btn2">查看重复数据</button>
+                            <button class="btn3">查看历史数据</button>
+                            <button class="btn4">查看相似数据</button>
+                        </div>
+                    </div> -->
+                    <div class="col-12 gl ">
+                        <div class="box">
+                            <div class="title" style="position: relative;">
+                                <div class="to">
+                                    <h3>警情数据列表</h3>
+                                    <div class="led-1">
+                                        <div class="layui-form">
+                                            <!-- <div class="layui-form-item" style="position: absolute;left: 30px;top: 43px;">
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label">自定义</label>
+                                                    <div class="layui-input-inline">
+                                                        <input type="text" class="layui-input" id="test6" placeholder=" -请选择日期范围 ">
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                        <select id="ervFonr-1">
+                                            <option value="" disabled>请选择</option>
+                                            <option value="1">一天内</option>
+                                            <option value="7">一周内</option>
+                                            <option value="30">一月内</option>
+                                            <option value="4" id="tta">自定义时间</option>
+                                            <!-- <option onclick="add_user()"><span style="width: 100%;height: 5px;background: aliceblue;" >选择日期范围</span></option> -->
+
+                                        </select>
+                                        <span class="bl">
+                                        <button class="btn1">查看全部数据</button>
+                                        <button class="btn2">查看重复数据</button>
+                                        <button class="btn3">查看历史数据</button>
+                                        <button class="btn4">查看相似数据</button>
+                                        </span>
+                                        <span class="ne">
+                                            <button id="btn5">查看全部数据</button>
+                                            <button  id="btn6">查看重复数据</button>
+                                            <button  id="btn7">查看历史数据</button>
+                                            <button   id="btn8">查看相似数据</button>
+                                        </span>
+                                        
+                                        <!-- <button class="btn1">导出</button> -->
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div>
+                                    <div class="investment_f">
+                                        <div class="investment_title">
+                                        </div>
+                                        <div class="investment_con">
+                                            <!-- 核查内容 -->
+
+
+
+                                            <div class="lists">
+                                                <table class="table-striped table-bordered table-hover" id="demo"
+                                                    lay-filter="demo">
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 弹出框 -->
+                                <div class="tan">
+                                    <div class="layui-form-item" style="position: absolute;left: 30px;top: 43px;">
+                                        <p>请选择需要查询的时间段：</p>
+                                        <div class="div33">
+                                            <label class="layui-form-label">开始时间</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" class="layui-input" id="test11" placeholder="请选择日期">
+                                            </div>
+                                        </div>
+                                        <div class="div33">
+                                            <label class="layui-form-label">结束时间</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" class="layui-input" id="test22" placeholder="请选择日期">
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <button class="btff">确定</button>
+                                        <button class="btcc">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="./vendor/jquery/jquery.min.js"></script>
+    <script src="./vendor/popper.js/popper.min.js"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./layui/layui.all.js"></script>
+    <script src="./js/carbon.js"></script>
+    <script src="./js/bashpath.js"></script>
+    <script src="./js/js.js"></script>
+    <script type="text/html" id="barDemo">
+            <a class="layui-btn layui-btn-xs" lay-event="detail">
+                <p>查看详情</p>
+            </a>
+           
+    </script>
+
+    <script>
+
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+
+            //常规用法
+            laydate.render({
+                elem: '#test1',
+                type: 'datetime'
+            });
+
+            laydate.render({
+                elem: '#test2',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#test3',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#test4',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#test11',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#test22',
+                type: 'datetime'
+            });
+            //日期范围
+
+
+
+        });
+
+    </script>
+    <script>
+        $("#exit").on("click", function () {  //将退出按钮的id设置为exit，然后将这个函数在公共文件里面即可
+                if (confirm('系统提示，您确定要退出本次登录吗?')) {
+                    //  session.removeAttribute(username);
+                    sessionStorage.removeItem("username")
+                    //  sessionStorage.removeItem(limit)
+                    location.href = './login.html';
+                }
+            })
+             // 判断session是否存在
+                if (se == null) {
+
+                    window.location.href = "./login.html";
+
+                }
+        $('#bei').click(function () {
+            var t = $("#sousuo").val();
+
+            if (t == null || t == undefined || t == '') {
+                layer.msg('搜索内容不可以为空')
+                console.log("value 为空")
+            } else {
+                var t = encodeURI(encodeURI(t));
+                console.log(t)
+                var url = "./tables.html?t=" + t + "&username=" + se;
+                window.location.href = url;
+            }
+
+        })
+
+
+        $(function () {
+            loadList();
+        });
+        $('.btn1').click(function () {
+            loadList();
+        })
+        function tdTitle() {
+            $('th').each(function (index, element) {
+                $(element).attr('title', $(element).text());
+            });
+            $('td').each(function (index, element) {
+                $(element).attr('title', $(element).text());
+            });
+        };
+        // window.setInterval("freshList()",7000);
+        function loadList() {
+
+
+            //获取查询时间与查询内容
+            var userId = $("#userId").val();
+            var createDate = $("#time").val();
+            var status = $("#ervFonr-1 option:selected").val();
+            var documentName = $("#name").val();
+            layui.use(['table', 'layer', 'laydate', 'laypage', 'util'], function () {
+                var $ = layui.$,
+                    table = layui.table,
+                    layer = layui.layer,
+                    laydate = layui.laydate;
+                var laypage = layui.laypage;
+                var util = layui.util;
+                $.ajaxSetup({
+                    xhrFields: {
+                        withCredentials: true
+                    }
+                });
+                //自定义格式
+                laydate.render({
+                    elem: '#demo',
+                    format: 'yyyy/MM/dd',
+                    range: true,
+                    theme: '#ff7f4f',
+                    done: function (value, date, endDate) {
+                        $("#time").val(value);
+                        table.reload('demo', {
+                            url: basePath + '/Ajfx/ResultAll',
+                            where: { //设定异步数据接口的额外参数，任意设
+                                limitName: '15',
+                                pageName: '1',
+                                // userId:userId,
+                                createDate: value,
+                                status: "",
+                                documentName: "",
+                                time: time
+                            }
+                        });
+                    }
+                });
+
+
+
+                table.render({
+                    elem: '#demo',
+                    page: {
+                        theme: '#ff7f4f',
+
+
+
+                    },
+
+                    page: true,
+                    // limits: [5, 10, 15], //显示
+                    limit: 15,//每页默认显示的数量
+                    where: {
+                        // userId:userId,
+                        // createDate: createDate,
+                        day: status,
+                        // likeName: documentName,
+                        // time: time
+                    } //如果无需传递额外参数，可不加该参数http-server
+                    ,
+                    url: basePath + '/Ajfx/ResultAll',
+                    cols: [
+                        [
+                            // { type: 'checkbox', width: 100, fixed: 'left', align: 'center' }
+                            , {
+                                title: '序号',
+                                align: 'center',
+                                type: 'numbers',
+                                // sort: true,
+                                width: 80
+                            }, 
+                            // {
+                            //     field: 'jQBT',
+                            //     title: '警情标题',
+                            //     width: "18%",
+                            //     align: 'center',
+                            //     templet: '<div><span title="{{d.jQBT}}">{{d.jQBT}}</span></div>',
+
+                            // }, 
+                            {
+                                field: 'jQXH',
+                                width: "20%",
+                                title: '警情序号',
+                                align: 'center',
+                                template: '#titleTpl'
+                            },
+                            {
+                                field: 'cJPCS',
+                                width: "24%",
+                                title: '出警派出所',
+                                align: 'center',
+                                // template: '#titleTpl'
+                            },
+                            // {
+                            //     field: 'counts',
+                            //     width: 200,
+                            //     title: '上传用户',
+                            //     align: 'center',
+                            //     template: '#titleTpl'
+                            // },
+                            {
+                                field: 'bJSJ', width: "30%", title: '报警时间', align: 'center', templet: "<div>{{layui.util.toDateString(d.bJSJ, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                            }
+                            , {
+                                title: '操作',
+                                field: 'docName',
+                                align: 'center',
+                                toolbar: "#barDemo"
+                                // type: 'numbers',
+                                // sort: true,
+
+                            }
+                            // , { field: 'status', width: 213, title: '状态', align: 'center' }
+                            // , { field: 'uploadDate', width: 170, title: '上传时间', align: 'center' }
+                            // , { width: 283, title: '操作', align: 'center', toolbar: "#barDemo" }
+
+                        ]
+                    ],
+                    done: function (res, page, count) {
+                        var that = this.elem.next();
+                        console.log(that)
+                        tdTitle();
+                        res.data.forEach(function (item, index) {
+                            console.log(item.sXZT)
+                            if (item.sXZT == 1) {
+                                var tr = that.find(".layui-table-box tbody tr[data-index='" + index + "']").css("color", "#bc3d4c");
+                            } else if (item.sXZT == 2) {
+                                var tr = that.find(".layui-table-box tbody tr[data-index='" + index + "']").css("color", "#FF6600");
+                            } else if (item.sXZT == 3) {
+                                var tr = that.find(".layui-table-box tbody tr[data-index='" + index + "']").css("color", "#3763ff");
+                            }
+                        });
+                    },
+
+                    //   $('th').css({
+                    //     'background-color': '#ed6a1a',
+                    //     'color': '#fff',
+                    //     'font-weight': 'bold'
+                    // })
+                    parseData: function (res) { //res 即为原始返回的数据
+
+                        //   console.log(res.pageList)
+                        // var lih = res.pageList
+                        // for (var i = 0; i < lih.length; i++) {
+                        //     console.log(lih[i].sXZT)
+                        //     if (lih[i].sXZT == 2) {
+                        //         $('.lists table .layui-table-col-special').css("color", "#bc3d4c")
+
+                        //         // $("#demo table th div").addClass("test");
+                        //     }
+                        //     // if (lih[i].sXZT == 2) {
+                        //     //     $('.layui-table-col-special').css("color", "#bc3d4c")
+                        //     //     //  $("#demo table th div").addClass("test1");
+                        //     // }
+                        //     // if (lih[i].sXZT == 3) {
+                        //     //     $('.layui-table-col-special').css("color", "#e0a447")
+                        //     //     //  $("#demo table th div").addClass("test2");
+                        //     // }
+                        //     // if (lih[i].sXZT == 4) {
+                        //     //     $('.layui-table-col-special').css("color", "#3763ff")
+                        //     //     //  $("#demo table th div").addClass("test3");
+                        //     // }
+                        // }
+                        return {
+                            "code": res.status, //解析接口状态
+                            "msg": res.message, //解析提示文本
+                            "count": res.totalCount, //解析数据长度
+                            "data": res.pageList //解析数据列表
+                        };
+                    },
+                    request: {
+                        pageName: 'pageNo' //页码的参数名称，默认：page
+                        ,
+                        // limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    }
+
+                });
+
+                //监听表格复选框选择
+                table.on('checkbox(demo)', function (obj) {
+                    console.log(obj);
+                });
+
+                //监听工具条
+                table.on('tool(demo)', function (obj) {
+                    console.log(obj)
+                    if (obj.event === 'detail') {
+
+
+                        var id = obj.data.jQID
+
+                        // var url = "../templates/fllow.html?time=" + time + "&uuid=" + uuid;
+                        var url = "./widgets.html?id=" + id
+
+                        window.location.href = url;
+
+
+                    } else if (obj.event === 'del') {
+                        layer.confirm('确认删除？', {
+                            btn: ['确定', '取消'],
+                            btn1: function (index, layero) {
+                                //后台执行删除操作
+                                $.post(basePath + '/eye/delete', {
+                                    'docId': data.id
+                                }, function (data) {
+                                    if (data.status == 1) {
+                                        layer.msg("删除成功", {
+                                            time: 1800,
+                                            icon: 1
+                                        });
+                                        loadList();
+                                    } else {
+                                        layer.msg('删除失败', {
+                                            time: 1800,
+                                            icon: 2
+                                        });
+                                    }
+                                }, 'json');
+                                layer.close(index);
+                            },
+                            btn2: function (index, layero) {
+                                layer.close(index);
+                            }
+                        });
+                    } else if (obj.event === 'edit') {
+                        if (data.status == '已修改' || (data.status == '核查完成' && data.errorCount == '0')) {
+                            $.post('/eye/get-down', {
+                                'docId': data.id
+                            }, function (data, status) {
+                                if (data == 'false') {
+                                    layer.msg('下载失败', {
+                                        time: 1800,
+                                        icon: 2
+                                    });
+                                } else {
+                                    data = JSON.parse(data);
+                                    window.location.href = basePath + "/eye/down-file/" + data.downkey +
+                                        "/" + data.docId;
+                                }
+                            });
+                        } else {
+                            layer.msg('此文件不可以下载', {
+                                time: 1800,
+                                icon: 2
+                            });
+                        }
+                    }
+                });
+
+            });
+        };
+
+
+        function add_user() {
+            layer.open({
+                type: 1,
+                title: '添加账号' //不显示标题栏
+                ,
+                closeBtn: false,
+                area: '600px;',
+                shade: 0.8,
+                btnAlign: 'c',
+                moveType: 1 //拖拽模式，0或者1
+                ,
+                btn: ['提交', '取消'],
+                content: '<div style="padding: 30px; line-height: 40px; background-color: #fff; color: #393D49; font-weight: 300;">' +
+                    '<table class="table-striped table-bordered table-hover" style="width:500px;text-align: center;">' +
+                    '<tr><td style="width: 70px;">账号</td><td style="width: 130px;"><input class="form-control" id="add_type"></td></tr>' +
+                    '<tr><td style="width: 70px;">姓名</td><td style="width: 130px;"><input class="form-control" id="add_name"></td></tr>' +
+                    '<tr><td style="width: 70px;">密码</td><td style="width: 130px;" > <input  class="form-control" id="add_password"> </td></tr>' +
+                    '<tr><td style="width: 130px;">账户类型</td><td><select id="selectid"  style="width: 216px; height:30px"><option>请选择</option><option value="机构管理员">机构管理员</option><option value="普通用户">普通用户</option></select ></td></tr></table>' +
+                    '</div>'
+
+                ,
+                yes: function () {
+
+                    var type = document.getElementById("add_type").value;
+                    var name = document.getElementById("add_name").value;
+                    var add_password = $("#add_password").val();
+
+                    var str = $("#selectid option:selected").val();
+                    var strs = $("#selectidd option:selected").val();
+                    console.log(name)
+                    console.log(str)
+                    //获得选中的值
+                    // $.ajax({
+                    //     type: "post",
+                    //     dataType: "json",
+                    //     url: basePath + "/level/levelList",
+                    //     data: {
+                    //         'select': str
+                    //     },
+                    //     xhrFields: {
+                    //         withCredentials: true
+                    //     },
+                    //     success: function (data) {
+                    //         console.log(data)
+                    //         //  if (msg) {
+                    //         //      alert(msg);
+                    //         //  }
+                    //     }
+                    // });
+
+                    $.ajax({
+                        type: "POST",
+                        url: basePath + '/user/addUser',
+                        data: {
+                            "userName": type,
+                            "password": add_password,
+
+                            "realName": name,
+                            "userType": str,
+
+                        },
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        dataType: "json",
+                        error: function () {
+                            //请求出错
+                            alert("出錯了！");
+                        },
+                        success: function (json) {
+                            console.log(json)
+                            //请求成功
+                            if (json.status == 1) {
+                                layer.msg("添加成功", {
+                                    icon: 1
+                                }, function () {
+                                    window.location.reload();
+
+
+
+                                })
+                            }
+
+                        }
+                    });
+
+                }
+            });
+
+        }
+
+    $('.bl').css("display", "inline")
+    $('.ne').css("display", "none")
+        // var sel = document.getElementById("ervFonr-1");
+        // sel.onchange = function () {
+        //     alert(sel.options[sel.selectedIndex[4]]);
+        // }
+        $("#ervFonr-1").change(function () {
+            var grjfe = $("#ervFonr-1").val();
+            // alert(grjfe);
+            if (grjfe == 4) {
+                $('.tan').css("display", "block")
+            } if (grjfe == 1) {
+                loadList();
+                $('.bl').css("display", "inline")
+                $('.ne').css("display", "none")
+            }  if (grjfe == 7) {
+                loadList();
+                $('.bl').css("display", "inline")
+                $('.ne').css("display", "none")
+            } if (grjfe == 30) {
+                loadList();
+                $('.bl').css("display", "inline")
+                $('.ne').css("display", "none")
+            } 
+        })
+
+
+        $("#piliang").click(function () {
+            layui.use(['layer', 'table'], function () {
+                var table = layui.table,
+                    layer = layui.layer,
+                    $ = layui.$
+
+                var checkStatus = table.checkStatus('demo');
+                data = checkStatus.data;
+                if (data.length == 0) {
+                    layer.msg("请选择要删除的选项！");
+                } else {
+                    layer.confirm('确定批量删除文件吗?', function (index) {
+                        arr = new Array();;
+                        for (var i = 0; i < data.length; i++) {
+                            arr.push(data[i].id);
+                        }
+                        arr.join(",");
+                        console.log(arr);
+                        $.ajax({
+                            url: basePath + '/file/batchdeldoc',
+                            type: 'post',
+                            dataType: 'json',
+                            data: {
+                                'temp': arr.toString()
+                            }, //向服务端发送删除的id
+                            success: function (suc) {
+                                if (suc.status == 1) {
+                                    layer.msg("删除成功", {
+                                        time: 1800,
+                                        icon: 1
+                                    });
+                                    loadList();
+                                } else {
+                                    layer.msg('删除失败', {
+                                        time: 1800,
+                                        icon: 2
+                                    });
+                                }
+                                layer.close(index);
+                                table.reload('table', {
+                                    where: { //设定异步数据接口的额外参数，任意设
+                                        'id': 1
+                                    },
+                                    page: {
+                                        //  curr: 1 //重新从第 1 页开始
+                                        curr: $(".layui-laypage-em").next()
+                                            .html()
+                                    }
+                                })
+
+
+                            }
+                        });
+                        layer.close(index);
+                    });
+                }
+            });
+        });
+
+
+
+    </script>
+
+</body>
+
+</html>

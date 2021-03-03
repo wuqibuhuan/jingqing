@@ -1,0 +1,251 @@
+@charset "utf-8";
+/* CSS Document */
+
+.box {
+    background-color: #193989;
+    padding: 10px 25px 0px 25px;
+    /* margin-top: 20px; */
+    /* margin-bottom: 20px; */
+    /* width: 1170px; */
+}
+
+.right {
+    float: right;
+    text-align: center
+}
+
+.left {
+    float: left;
+}
+
+
+
+
+.title h3 {
+    font-size: 14px;
+    font-weight: bold;
+    color: aliceblue;
+    /* float: left; */
+    line-height: 26px;
+}
+
+
+/*.top_select{ margin: 25px 0 15px 0; }*/
+.top_select select {
+    float: left;
+    margin-right: 6px;
+}
+
+.top_select p {
+    float: left;
+    margin-right: 6px;
+    line-height: 34px;
+}
+
+.top_select input {
+    float: left;
+}
+
+.top_select button {
+    float: left;
+}
+
+/* .layui-table-cell {
+    width: 80px;
+} */
+
+.list {
+    position: relative;
+}
+
+.list table {
+    width: 1120px;
+}
+
+.list table,
+.list tr,
+.list th,
+.list td {
+    padding: 10px 8px;
+    text-align: center;
+}
+
+.list td span {
+    color: #0093dd;
+}
+
+.list td p {
+    float: left;
+    font-size: 12px;
+    font-weight: normal;
+    color: #3aaaf8;
+    margin-left: 8px;
+}
+
+.list td button {
+    border: none;
+    margin-top: -4px;
+    color: #fff;
+    border-radius: 4px;
+}
+
+
+#assign {
+    position: absolute;
+    z-index: 10;
+    width: 320px;
+    height: 220px;
+    background-color: white;
+    border: 1px #57a5fd solid;
+    top: 164px;
+    left: 400px;
+}
+
+#assign h3 {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #0093dd;
+    color: #fff;
+    padding: 4px 0;
+}
+
+#assign input {
+    float: left;
+    width: 200px;
+    height: 28px;
+    margin: 15px 0 0 35px;
+}
+
+#assign .img {
+    width: 320px;
+    text-align: center;
+    float: left;
+    padding-top: 20px;
+}
+
+#assign .img img {
+    width: 240px;
+}
+
+#assign .btn-select {
+    float: left;
+    background-color: #0093dd;
+    padding: 4px 10px;
+    margin-top: 15px;
+    color: white;
+    font-size: 14px;
+    border: none;
+}
+
+#queding {
+    float: left;
+    background-color: #0093dd;
+    width: 159px;
+    height: 32px;
+    margin-top: 25px;
+    color: white;
+    font-size: 14px;
+    border: none;
+}
+
+#assign .quxiao {
+    float: left;
+    background-color: #eee;
+    width: 159px;
+    height: 32px;
+    margin-top: 25px;
+    color: #424242;
+    font-size: 14px;
+    border: none;
+}
+
+
+
+#tishi {
+    position: absolute;
+    z-index: 10;
+    width: 320px;
+    height: 100px;
+    /* background-color: white; */
+    /* border: 1px #57a5fd solid; */
+    /* top: 164px; */
+    left: 42%;
+    text-align: center;
+}
+
+#tishi p {
+    font-size: 16px;
+    margin: 25px auto 15px auto;
+}
+
+#tishi button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: transparent;
+    border: none;
+}
+
+#delete {
+    position: absolute;
+    z-index: 10;
+    width: 510px;
+    background-color: white;
+    border: 1px #57a5fd solid;
+    top: 0;
+    left: 260px;
+}
+
+#delete .top {
+    background-color: #1363be;
+    border-bottom: 1px #57a5fd solid;
+    height: 50px;
+    width: 510px;
+    font-size: 16px;
+    color: #f3f3f3;
+    font-weight: bold;
+    padding: 14px 27px;
+}
+
+#delete .box button {
+    background-color: #1363be;
+    width: 80px;
+    height: 32px;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    margin: 30px 30px;
+}
+
+#delete .box {
+    width: 350px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+#delete .box h3 {
+    font-size: 16px;
+    color: #393939;
+    font-weight: normal;
+    float: left;
+    line-height: 40px;
+}
+
+#page .other1 {
+    float: right;
+    margin-right: 30px;
+    font-size: 12px;
+    color: 666;
+    margin-top: 25px;
+}
+
+.list td .btn img {
+    display: block;
+    margin: auto;
+}
+
+.list td .btn.disabled {
+    background-color: #aaa;
+}

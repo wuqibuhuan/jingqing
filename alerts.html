@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>警情分析</title>
+    <link rel="stylesheet" href="./vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="./vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./css/table.css">
+</head>
+
+<body class="sidebar-fixed header-fixed">
+    <div class="page-wrapper">
+        <nav class="navbar page-header">
+            <p style="position: absolute;top: 2px;left: 17px; color: aliceblue; font: 16px Microsoft YaHei;">
+                <i class="icon icon-user"></i> 用户名：<span id="username"></span>
+            </p>
+            
+            <a class="navbar-brand" href="#" id="exit">
+            
+                <i class="icon icon-info"></i> 退出登录
+            </a>
+
+            <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">
+                <i class="fa fa-bars"></i>
+            </a>
+            <a href="#">
+                <img src="./imgs/jing.png" alt="logo" style="width: 45px;height: 45px;    margin-bottom: 14px;">
+            </a>
+            <h1 style="color: aliceblue;font-weight: 700;" class="xiongan">雄安新区公安局情报合成作战中心重复报警数据分析平台</h1>
+            <ul class="navbar-nav ml-auto">
+                <div class="search d7">
+
+                    <input type="text" id="sousuo" >
+                    <button type="submit" id="bei"></button>
+
+                </div>
+            </ul>
+
+
+        </nav>
+
+        <div class="main-container">
+            <div class="sidebar">
+                <nav class="sidebar-nav">
+                    <ul class="nav">
+                        <!-- <li class="nav-title">Navigation</li> -->
+
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link ">
+                                <i class="icon icon-speedometer"></i> 警情监测
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="forms.html" class="nav-link">
+                                <i class="icon icon-puzzle"></i> 案件分析
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-item">
+                                                        <a href="tables.html" class="nav-link ">
+                                                            <i class="icon icon-grid"></i> 数据检索
+                                                        </a>
+                                                    </li> -->
+                        <li class="nav-item">
+                            <a href="chartjs.html" class="nav-link ">
+                                <i class="icon icon-pin"></i> 警情图谱
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="alerts.html" class="nav-link active">
+                                <i class="icon icon-film"></i> 警情分析
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="blank.html" class="nav-link ">
+                                <i class="icon icon-docs"></i> 警情统计
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="settings.html" class="nav-link ">
+                                <i class="icon icon-calculator"></i> 数据导出
+                            </a>
+                        </li>
+                        <li class="nav-item nav-dropdown">
+                            <a href="#" class="nav-link nav-dropdown-toggle ">
+                                <i class="icon icon-umbrella"></i>后台管理<i class="fa fa-caret-left"></i>
+                            </a>
+
+                            <ul class="nav-dropdown-items">
+                                <li class="nav-item">
+                                    <a href="cards.html" class="nav-link  ">
+                                        <i class="icon icon-umbrella"></i>用户管理
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="buttons.html" class="nav-link ">
+                                        <i class="icon icon-umbrella"></i>用户日志
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="tabs.html" class="nav-link ">
+                                        <i class="icon icon-umbrella"></i>搜索记录
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="register.html" class="nav-link">
+                                        <i class="icon icon-umbrella"></i>导出记录
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="content">
+                <div class="row">
+                    <div class="col-12 dl">
+                        <p style="float: left;">警情分析</p>
+                        <div class="al1">
+                            <button class="bbt" onclick="analyze()">开始分析</button>
+                            <div class="div3">
+
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" id="stop" placeholder="请选择结束日期">
+                                </div>
+                            </div>
+                            <div class="heng"></div>
+                            <div class="div3">
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" id="start" placeholder="请选择开始日期">
+                                </div>
+                            </div>
+                            <p style="float: right; margin-right: 15px;">选择时间</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="box-sizing: border-box;">
+                    <div class="col-6 ll" id="TopTenDD"></div>
+                    <div class="col-6 lt" id="TopTenType"></div>
+                </div>
+                <div class="row">
+                    <div class="col-6 ll" id="Type"></div>
+                    <div class="col-6 lt" id="Moment"></div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <script src="./vendor/jquery/jquery.min.js"></script>
+    <script src="./vendor/popper.js/popper.min.js"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./js/carbon.js"></script>
+    <script src="./layui/layui.all.js"></script>
+    <script src="./js/bashpath.js"></script>
+    <script src="./js/echarts.js"></script>
+    <script>
+         $("#exit").on("click", function () {  //将退出按钮的id设置为exit，然后将这个函数在公共文件里面即可
+                if (confirm('系统提示，您确定要退出本次登录吗?')) {
+                    //  session.removeAttribute(username);
+                    sessionStorage.removeItem("username")
+                    //  sessionStorage.removeItem(limit)
+                    location.href = './login.html';
+                }
+            })
+             // 判断session是否存在
+                if (se == null) {
+
+                    window.location.href = "./login.html";
+
+                }
+        $('#bei').click(function () {
+                var t = $("#sousuo").val();
+
+                if (t == null || t == undefined || t == '') {
+                    layer.msg('搜索内容不可以为空')
+                    console.log("value 为空")
+                } else {
+                    var t = encodeURI(encodeURI(t));
+                    console.log(t)
+                    var url = "./tables.html?t=" + t + "&username=" + se;
+                    window.location.href = url;
+                }
+
+            })
+
+    </script>
+    <script>
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+
+            //常规用法
+            laydate.render({
+                elem: '#start',
+                type: 'datetime'
+            });
+
+            laydate.render({
+                elem: '#stop',
+                type: 'datetime'
+            });
+        });
+        $(function () {
+            Type();
+            TopTenDD();
+            TopTenType();
+            Moment();
+        });
+        //分析
+        function analyze() {
+            var StartTime = document.getElementById("start").value;
+            var StopTime = document.getElementById("stop").value;
+            if (StartTime == "" &&  StopTime == "") {
+                layer.msg("请选择时间")
+                return false;
+            }
+            if (StartTime == "" &&  StopTime != "") {
+                layer.msg("请选择开始时间")
+                return false;
+            }
+            if (StartTime != "" &&  StopTime == "") {
+                 layer.msg("请选择结束时间")
+                return false;
+            }
+            Type(StartTime, StopTime);
+            TopTenDD(StartTime, StopTime);
+            TopTenType(StartTime, StopTime);
+            Moment(StartTime, StopTime);
+        }
+        // 全量统计
+        function Type(StartTime, StopTime) {
+            $
+                .ajax({
+                    url: basePath + '/Jqfx/Type',
+                    data: {
+                        StartTime: StartTime,
+                        StopTime: StopTime
+                    },
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+                        var myChart = echarts.init(document
+                            .getElementById('Type'));
+                        option = {
+                            title: {
+                                text: '案件类型统计',
+                                left: 'left',
+                                textStyle: {
+                                    color: '#fff',
+                                     fontSize: 12
+                                }
+                            },
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: '{a} <br/>{b} : {c} ({d}%)'
+                            },
+                            // legend: {
+                            //     left: 'center',
+                            //     top: 'bottom',
+                            //     data: data.title,
+                            //     textStyle: {
+                            //             color: '#fff'
+                            //         }
+
+                            // },
+                            toolbox: {
+                                show: false,
+                                feature: {
+                                    mark: {
+                                        show: true
+                                    },
+                                    dataView: {
+                                        show: true,
+                                        readOnly: false
+                                    },
+                                    magicType: {
+                                        show: true,
+                                        type: ['pie', 'funnel']
+                                    },
+                                    restore: {
+                                        show: true
+                                    },
+                                    saveAsImage: {
+                                        show: true
+                                    }
+                                }
+                            },
+                            series: [{
+                                name: '总量',
+                                type: 'pie',
+                                radius: [30, 110],
+                                center: ['50%', '50%'],
+                                roseType: 'area',
+                                data: data.listValue
+                            }]
+                        };
+                        myChart.setOption(option);
+                        window.onresize = function () {
+                            myChart.resize();
+                        }
+                    }
+                });
+        }
+        // 时刻统计
+        function Moment(StartTime, StopTime) {
+            $.ajax({
+                url: basePath + '/Jqfx/Moment',
+                data: {
+                    StartTime: StartTime,
+                    StopTime: StopTime
+                },
+                dataType: "json",
+                type: "POST",
+                success: function (data) {
+                    var myChart = echarts.init(document
+                        .getElementById('Moment'));
+                    option = {
+                        backgroundColor: '#183b8a',
+                        title: {
+                            text: '时刻统计',
+                            left: 'left',
+                            textStyle: {
+                                color: '#fff',
+                                fontSize: 12
+                            }
+                        },
+                        xAxis: {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: data.title,
+                            axisLabel: {
+                                color: "#ff0" //刻度线标签颜色
+                            }
+                        },
+                        yAxis: {
+                            type: 'value',
+                            axisLabel: {
+                                color: "#ff0" //刻度线标签颜色
+                            }
+                        },
+
+                        series: [{
+                            data: data.value,
+                            type: 'line',
+                            areaStyle: {}
+                        }]
+                    };
+                    myChart.setOption(option);
+                    window.onresize = function () {
+                        myChart.resize();
+                    }
+                }
+            });
+        }
+        // Top10-地点
+        function TopTenDD(StartTime, StopTime) {
+            $.ajax({
+                url: basePath + '/Jqfx/TopTenDD',
+                data: {
+                    StartTime: StartTime,
+                    StopTime: StopTime
+                },
+                dataType: "json",
+                type: "POST",
+                success: function (data) {
+                    var myChart = echarts.init(document
+                        .getElementById('TopTenDD'));
+                    option = {
+                        title: {
+                            text: 'Top10-地点',
+                            left: 'left',
+                            textStyle: {
+                                color: '#fff',
+                                 fontSize: 12
+                            }
+                        },
+                        backgroundColor: '#183b8a',
+                        // grid: {
+                        //     top: '15%',
+                        //     right: '3%',
+                        //     left: '5%',
+                        //     bottom: '12%'
+                        // },
+                        xAxis: [{
+                            type: 'category',
+                            color: '#59588D',
+                            data: data.title,
+                            axisPointer: {
+                                type: 'line'
+                            },
+
+                            axisLine: {
+                                lineStyle: {
+                                    color: '#272456'
+                                }
+                            },
+                            axisLabel: {
+                                margin: 10,
+                                color: '#fff',
+                                interval: 0,
+                                rotate: 25,//倾斜度 -90 至 90 默认为0
+                                textStyle: {
+                                    fontSize: 9
+                                },
+                            },
+
+                        }],
+                        yAxis: [{
+                            // min: 0,
+                            // max: 100,
+                            axisLabel: {
+                                formatter: '{value}%',
+                                color: '#fff',
+                                 
+                            },
+                            axisLine: {
+                                show: false
+                            },
+                            splitLine: {
+                                lineStyle: {
+                                    color: '#272456'
+                                }
+                            }
+                        }],
+                        series: [{
+                            type: 'bar',
+                            data: data.value,
+                            barWidth: '20px',
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1, [{
+                                            offset: 0,
+                                            color: '#41E1D4' // 0% 处的颜色
+                                        }, {
+                                            offset: 1,
+                                            color: '#10A7DB' // 100% 处的颜色
+                                        }], false),
+                                    barBorderRadius: [10, 10, 0, 0],
+                                    shadowColor: 'rgba(0,255,225,1)',
+                                    shadowBlur: 2,
+                                }
+                            },
+                            label: {
+                                normal: {
+                                    show: true,
+                                    lineHeight: 30,
+                                    width: 80,
+                                    height: 30,
+                                    backgroundColor: '#252453',
+                                    borderRadius: 200,
+                                    position: ['-8', '-60'],
+                                    distance: 1,
+                                    formatter: ['    {d|●}',
+                                        ' {a|{c}%}     \n', '    {b|}']
+                                        .join(''),
+                                    rich: {
+                                        d: {
+                                            color: '#3CDDCF',
+                                        },
+                                        a: {
+                                            color: '#fff',
+                                            align: 'center',
+                                        },
+                                        b: {
+                                            width: 1,
+                                            height: 30,
+                                            borderWidth: 1,
+                                            borderColor: '#234e6c',
+                                            align: 'left'
+                                        },
+                                    }
+                                }
+                            }
+                        }]
+                    };
+                    myChart.setOption(option);
+                    window.onresize = function () {
+                        myChart.resize();
+                    }
+                }
+            });
+        }
+         // Top10-分类
+            function TopTenType() {
+                $.ajax({
+                    url: basePath + '/Jqjc/TopTenType',
+                    dataType: "json",
+                    type: "POST",
+                    success: function (dataValue) {
+                        var data = dataValue.result;
+                        //有值的色图的正切处理
+                        var data3 = [];
+                        data3 = JSON.parse(JSON.stringify(data));
+                        for (var i = 0; i < data3.length; i++) {
+                            if (i === 0) {
+                                data3[i]['label']['color'] = '#333';
+                                data3[i]['itemStyle']['color'] = 'rgba(25, 255, 224)';
+                                data3[i]['emphasis']['itemStyle']['color'] = 'rgba(25, 255, 224)';
+                                data3[i]['label']['rotate'] = angleText(i, data3.length);
+                            } else {
+                                data3[i]['label']['color'] = '#fff';
+                                data3[i]['itemStyle']['color'] = '#4169E1';
+                                data3[i]['emphasis']['itemStyle']['color'] = '#6A5ACD';
+                                data3[i]['label']['rotate'] = angleText(i, data3.length);
+                            }
+                        }
+
+
+                        //最外层大圈的数据
+                        var data1 = [];
+
+                        data1 = JSON.parse(JSON.stringify(data));
+                        for (var i = 0; i < data1.length; i++) {
+                            data1[i].value = 1;
+                            data1[i]['label']['rotate'] = angleText(i, data1.length);
+                            if (i === 0) {
+                                data1[i]['label']['color'] = 'rgba(25, 255, 224)';
+                            }
+                        }
+
+                        //透明饼图的数据
+                        var data2 = [];
+
+                        for (var i = 0; i < data.length; i++) {
+                            if (i === 0) {
+                                data2.push({
+                                    value: 1,
+                                    itemStyle: {
+                                        color: 'rgba(25, 255, 224,0.05)',
+                                    }
+                                });
+                            } else {
+                                data2.push({
+                                    value: 1,
+                                    itemStyle: {
+                                        color: 'transparent',
+                                    }
+                                });
+                            }
+                        }
+                        var myChart = echarts.init(document
+                            .getElementById('TopTenType'));
+                        var option = {
+                            title: {
+                                text: 'Top10-类型',
+                                left: 'left',
+                                textStyle: {
+                                    color: '#fff',
+                                    fontSize: 12
+                                }
+                            },
+                            backgroundColor: '#183b8a',
+                            grid: {
+                            },
+                            polar: {},
+                            angleAxis: {
+                                show: false,
+                                interval: 1,
+                                type: 'category',
+                                data: [],
+
+
+                            },
+                            //中间画圈圈的坐标轴
+                            radiusAxis: {
+                                show: false
+                            },
+                            series: [{
+                                type: 'pie',
+                                radius: ["68%", "125%"],
+                                hoverAnimation: false,
+                                itemStyle: {
+                                    color: 'transparent'
+                                },
+                                labelLine: {
+                                    normal: {
+                                        show: false,
+                                        length: 30,
+                                        length2: 55
+                                    },
+                                },
+                                label: {
+                                    normal: {
+                                        position: 'inside',
+                                        align: 'right'
+                                    }
+                                },
+                                name: "",
+                                data: data1
+                            }, {
+                                stack: 'a',
+                                type: 'pie',
+                                radius: ['75%', '42%'],
+                                roseType: 'area',
+                                zlevel: 10,
+                                itemStyle: {
+                                    color: '#4169E1',
+                                },
+                                emphasis: {
+                                    itemStyle: {
+                                        color: '#6A5ACD'
+                                    }
+                                },
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        textStyle: {
+                                            fontSize: 18,
+                                            color: '#fff'
+                                        },
+                                        position: 'inside',
+                                        rotate: 30,
+                                        align: 'right',
+                                        fontWeight: 'bold',
+                                        formatter: '{c}%'
+                                    },
+                                    emphasis: {
+                                        show: true
+                                    }
+                                },
+                                animation: false,
+                                data: data3
+                            }, {
+                                type: 'pie',
+                                zlevel: 99,
+                                radius: ["15%", "90%"],
+                                selectedOffset: 0,
+                                animation: false,
+                                hoverAnimation: false,
+                                label: {
+                                    normal: {
+                                        show: false,
+                                    }
+                                },
+                                data: data2
+                            }]
+                        };
+                        myChart.setOption(option);
+                        myChart.on('click', function (a) {
+                            //最外层的字体颜色重置变色
+                            for (var da1 = 0; da1 < option.series[0].data.length; da1++) {
+                                option.series[0].data[da1].label.color = '#fff';
+                            }
+
+                            //色圈的字体颜色和选中颜色重置
+                            for (var da2 = 0; da2 < option.series[1].data.length; da2++) {
+                                option.series[1].data[da2].itemStyle.color = '#4169E1';
+                                option.series[1].data[da2].label.color = '#fff';
+                                //hover颜色重置
+                                option.series[1].data[da2].emphasis.itemStyle.color = '#6A5ACD';
+
+                            }
+
+                            //背景的透明饼图的重置
+                            for (var da3 = 0; da3 < option.series[2].data.length; da3++) {
+                                option.series[2].data[da3].itemStyle.color = 'transparent';
+                            }
+
+                            option.series[1].data[a.dataIndex].itemStyle.color = 'rgba(25, 255, 224)';
+                            option.series[1].data[a.dataIndex].label.color = '#333';
+                            //hover 颜色改变
+                            option.series[1].data[a.dataIndex].emphasis.itemStyle.color = 'rgba(25, 255, 224)';
+                            option.series[0].data[a.dataIndex].label.color = 'rgba(25, 255, 224)';
+                            option.series[2].data[a.dataIndex].itemStyle.color = 'rgba(25, 255, 224,0.1)';
+                            //console.log(option)
+                            myChart.setOption(option);
+                        });
+
+                        myChart.on('mouseover', function (a) {
+                            myChart.dispatchAction({
+                                type: 'highlight',
+                                seriesIndex: 1,
+                                dataIndex: a.dataIndex
+                            });
+                        });
+
+                        myChart.on('mouseout', function (a) {
+                            myChart.dispatchAction({
+                                type: 'downplay',
+                                seriesIndex: 1,
+                                dataIndex: a.dataIndex
+                            });
+                        });
+                        window.onresize = function () {
+                            myChart.resize();
+                        }
+                    }
+                });
+            }
+            function angleText(i, num) {
+                //每个元素的角度
+                var everyAngle = 360 / num;
+                //文字现在所在的角度
+                var currentAngle = i * everyAngle + everyAngle / 2;
+                //文字所在模块的所占角度
+                var currentArea = (i + 1) * everyAngle;
+
+                if (currentAngle <= 90) {
+                    return -currentAngle;
+                } else if (currentAngle <= 180 && currentAngle > 90) {
+                    return 180 - currentAngle;
+                } else if (currentAngle < 270 && currentAngle > 180) {
+                    return 180 - currentAngle;
+                } else if (currentAngle < 360 && currentAngle >= 270) {
+                    return 360 - currentAngle;
+                }
+            }
+
+    </script>
+</body>
+
+</html>

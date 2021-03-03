@@ -1,0 +1,1464 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>警情检测</title>
+    <link rel="stylesheet" href="./vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="./vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/miaov_style.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <style>
+        .lists .layui-table {
+            width: 100%;
+            background-color: #183b8a;
+            color: #fff;
+        }
+        .lists .layui-table tbody tr:hover {
+            background-color: #032881;
+        }
+        .layui-body{overflow-y: scroll;}
+         body{overflow-y: scroll;}
+    </style>
+</head>
+
+<body class="sidebar-fixed header-fixed" οnlοad="load_data()">
+    <div class="page-wrapper">
+        <nav class="navbar page-header">
+            <p style="position: absolute;top: 2px;left: 17px; color: aliceblue; font: 16px Microsoft YaHei;">
+                <i class="icon icon-user"></i> 用户名：<span id="username"></span>
+            </p>
+            <p  id="cue" style="position: absolute;top: 2px;left: 17px; color: aliceblue; font: 16px Microsoft YaHei; display: none;" >
+                <i class="icon icon-user"></i> <span >未登录</span>
+            </p>
+            
+            <a class="navbar-brand" href="#" id="exit">
+            
+                <i class="icon icon-info"></i> 退出登录
+            </a>
+
+            <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">
+                <i class="fa fa-bars"></i>
+            </a>
+            <a href="#">
+                <img src="./imgs/jing.png" alt="logo" style="width: 45px;height: 45px;    margin-bottom: 14px;">
+            </a>
+            <h1 style="color: aliceblue;font-weight: 700;" class="xiongan">雄安新区公安局情报合成作战中心重复报警数据分析平台</h1>
+            <ul class="navbar-nav ml-auto">
+                <div class="search d7">
+
+                    <input type="text" id="sousuo" >
+                    <button type="submit" id="bei"></button>
+
+                </div>
+            </ul>
+
+
+        </nav>
+        <div class="main-container">
+            <div class="sidebar">
+                <nav class="sidebar-nav">
+                    <ul class="nav">
+                        <!-- <li class="nav-title">Navigation</li> -->
+
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link active">
+                                <i class="icon icon-speedometer"></i> 警情监测
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="forms.html" class="nav-link">
+                                <i class="icon icon-puzzle"></i> 案件分析
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-item">
+                                                                    <a href="tables.html" class="nav-link ">
+                                                                        <i class="icon icon-grid"></i> 数据检索
+                                                                    </a>
+                                                                </li> -->
+                        <li class="nav-item">
+                            <a href="chartjs.html" class="nav-link ">
+                                <i class="icon icon-pin"></i> 警情图谱
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="alerts.html" class="nav-link">
+                                <i class="icon icon-film"></i> 警情分析
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="blank.html" class="nav-link ">
+                                <i class="icon icon-docs"></i> 警情统计
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="settings.html" class="nav-link ">
+                                <i class="icon icon-calculator"></i> 数据导出
+                            </a>
+                        </li>
+                        <li class="nav-item nav-dropdown">
+                            <a href="#" class="nav-link nav-dropdown-toggle ">
+                                <i class="icon icon-umbrella"></i>后台管理<i class="fa fa-caret-left"></i>
+                            </a>
+
+                            <ul class="nav-dropdown-items">
+                                <li class="nav-item">
+                                    <a href="cards.html" class="nav-link  ">
+                                        <i class="icon icon-umbrella"></i>用户管理
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="buttons.html" class="nav-link ">
+                                        <i class="icon icon-umbrella"></i>用户日志
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="tabs.html" class="nav-link ">
+                                        <i class="icon icon-umbrella"></i>搜索记录
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="register.html" class="nav-link">
+                                        <i class="icon icon-umbrella"></i>导出记录
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </nav>
+            </div>
+            <div class="content">
+
+                <!-- 实时警情列表 -->
+                <div class="list" id="RealTime">
+                    <div class="box-7">
+                        <div class="title">
+
+                            <div>
+                                <div class="investment_f">
+                                    <div class="investment_title">
+                                    </div>
+                                    <div class="investment_con">
+                                        <!-- 核查内容 -->
+                                        <div class="lists">
+                                            <table class="table-striped table-bordered table-hover" id="demo"
+                                                lay-filter="demo">
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 案件统计 -->
+                <div class="an" id="RepeatPeoplePhone"></div>
+                <!-- 报警统计 -->
+                <div class="siren" id="FullAmount"></div>
+                <div class="clearfix"></div>
+
+
+
+                <!-- 24--top10 -->
+                <div class="ten" id="TopTenDD"></div>
+                <div class="qing" id="TopTenType"></div>
+                <div class="clearfix"></div>
+                <div class="ten" id="Moment"></div>
+                <div class="qing" id="WordCloud"></div>
+                <div class="rgh" id="Type"></div>
+            </div>
+        </div>
+    </div>
+    <script src="./vendor/jquery/jquery.min.js"></script>
+    <script src="./vendor/popper.js/popper.min.js"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./js/carbon.js"></script>
+    <script src="./js/bashpath.js"></script>
+    <script src="./js/echarts.js"></script>
+    <script src="./js/miaov.js"></script>
+    <script src="./layui/layui.all.js"></script>
+    <script>
+        $("#exit").on("click", function () {  //将退出按钮的id设置为exit，然后将这个函数在公共文件里面即可
+                 if (confirm('系统提示，您确定要退出本次登录吗?')) {            
+                //  session.removeAttribute(username);
+                  sessionStorage.removeItem("username") 
+                 //  sessionStorage.removeItem(limit)
+                 location.href = './login.html';
+            }
+            })
+            // // 判断session是否存在
+            //     if (se == null) {
+                  
+            //             window.location.href = "./login.html";
+                   
+            //     }
+          $('#bei').click(function () {
+                var t = $("#sousuo").val();
+
+                if (t == null || t == undefined || t == '') {
+                    layer.msg('搜索内容不可以为空')
+                    console.log("value 为空")
+                } else {
+                    var t = encodeURI(encodeURI(t));
+                    console.log(t)
+                    var url = "./tables.html?t=" + t + "&username=" + se;
+                    window.location.href = url;
+                }
+
+            })
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            FullAmount();
+            Type();
+            Moment();
+            TopTenDD();
+            TopTenType();
+            RealTime();
+            RepeatPeoplePhone();
+            WordCloud();
+            // var jqxh = "A2019000000000049";
+            // var jqbt = "江华警方破获系列挖掘机柴油电瓶盗窃案";
+            // analyze(jqxh, jqbt);
+        });
+        // 全量统计
+        
+        function FullAmount() {
+            $.ajax({
+                url: basePath + '/Jqjc/FullAmount',
+                dataType: "json",
+                type: "POST",
+                success: function (data) {
+                    var myChart = echarts.init(document
+                        .getElementById('FullAmount'));
+                    var scale = 1;
+                    var total_datas = data.count;
+                    var echartData = data.data;
+                    //var hjWZZList=map.hjWZZList;
+                 
+                    var hjYHZList = map.hjYHZList;
+                  
+                    var hjZRSList = map.hjZRSList;
+                    
+                    var hzlList_d = map.hzlList;
+                    var hzlList = new Array();
+                    for (var i = 0; i < hzlList_d.length && i < hjYHZList.length && i < hjZRSList.length; i++) {
+                        hzlList[i] = {
+                            value: hzlList_d[i],
+                            tooltip: {
+                                formatter: '{b}<br/>升学率：{c}%<br/>已分配：' + hjYHZList[i] + '<br/>总人数：' + hjZRSList[i]
+
+                            }
+                        };
+                    }
+                    var rich = {
+                        yellow: {
+                            color: "#ffc72b",
+                            fontSize: 15 * scale,
+                            // padding: [21, 0],
+                            align: 'center'
+                        },
+                        total: {
+                            color: "#ffc72b",
+                            fontSize: 40 * scale,
+                            align: 'center'
+                        },
+
+                        blue: {
+                            color: '#49dff0',
+                            fontSize: 16 * scale,
+                            align: 'center'
+                        },
+                        hr: {
+                            borderColor: '#0b5263',
+                            width: '100%',
+                            borderWidth: 1,
+                            height: 0,
+                        }
+                    }, option = {
+                        backgroundColor: '#183b8a',
+                        title: {
+                            text: '总数',
+                            subtext: total_datas,
+                            textStyle: {
+                                color: '#f2f2f2',
+                                fontSize: 30,
+                                align: 'center'
+                            },
+                            subtextStyle: {
+                                fontSize: 30,
+                                color: ['#ff9d19']
+                            },
+                            x: 'center',
+                            y: 'center',
+                        },
+                        legend: {
+                            // orient 设置布局方式，默认水平布局，可选值：'horizontal'（水平） | 'vertical'（垂直）
+                            orient: 'horizontal',
+                            // x 设置水平安放位置，默认全图居中，可选值：'center' | 'left' | 'right' | {number}（x坐标，单位px）
+                            x: 'center',
+                            // y 设置垂直安放位置，默认全图顶端，可选值：'top' | 'bottom' | 'center' | {number}（y坐标，单位px）
+                            // y: 'center',
+                            itemWidth: 24, // 设置图例图形的宽
+                            itemHeight: 18, // 设置图例图形的高
+                            textStyle: {
+                                color: '#fff' // 图例文字颜色
+                            },
+                            // itemGap设置各个item之间的间隔，单位px，默认为10，横向布局时为水平间隔，纵向布局时为纵向间隔
+                            itemGap: 30,
+                            data: data.title
+                        },
+
+                        series: [{
+                            name: '总考生数量',
+                            type: 'pie',
+                            itemStyle: {
+                                normal: {
+                                    borderWidth: 5,
+                                    borderColor: "#030d22"
+                                }
+                            },
+                            radius: ['38%', '45%'],
+                            hoverAnimation: false,
+                            color: ['#c487ee', '#deb140', '#49dff0',
+                                '#034079', '#6f81da', '#00ffb4'],
+                            label: {
+                                normal: {
+                                    formatter: function (params,
+                                        ticket, callback) {
+                                        var total = 0; //考生总数量
+                                        var percent = 0; //考生占比
+                                        echartData.forEach(function (
+                                            value, index, array) {
+                                            total += value.value;
+                                        });
+                                        percent = ((params.value / total) * 100)
+                                            .toFixed(1);
+                                        return '{yellow|'
+                                            + params.value
+                                            + '}\n{blue|' + percent
+                                            + '%}';
+                                    },
+                                    rich: rich
+                                    
+                                },
+                            },
+                            labelLine: {
+                                normal: {
+                                    length: 35 * scale,
+                                    length2: 10,
+                                    lineStyle: {
+                                        color: '#fff'
+                                    }
+                                }
+                            },
+                            data: echartData
+                        }]
+                    };
+                    myChart.setOption(option);
+                    window.onresize = function () {
+                        myChart.resize();
+                    }
+                }
+            });
+        }
+        // 全类型统计
+        function Type() {
+            $
+                .ajax({
+                    url: basePath + '/Jqjc/Type',
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+                        var myChart1 = echarts.init(document
+                            .getElementById('Type'));
+                        option = {
+                             title: {
+                                text: '全类型统计',
+                                left: 'left',
+                                textStyle: {
+                                    color: '#fff',
+                                     fontSize: 12
+                                }
+                            },
+                            backgroundColor: '#183b8a',
+                            color: ["#EAEA26", "#906BF9", "#FE5656",
+                                "#01E17E", "#3DD1F9", "#FFAD05"],
+                            // grid: {
+                            //     left: -100,
+                            //     top: 50,
+                            //     bottom: 10,
+                            //     right: 10,
+                            //     containLabel: true
+                            // },
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: '{a} <br/>{b} : {c} ({d}%)'
+                            },
+                            // legend: {
+                            //     type: "scroll",
+                            //     orient: "horizontal",
+                            //     x: "right",
+                            //     // top: "center",
+                            //     right: "15",
+                            //     bottom: "0%",
+                            //     itemWidth: 16,
+                            //     itemHeight: 8,
+                            //     itemGap: 16,
+                            //     textStyle: {
+                            //         color: '#A3E2F4',
+                            //         fontSize: 12,
+                            //         fontWeight: 0
+                            //     },
+                            //     data: data.title
+                            // },
+                            polar: {},
+                            angleAxis: {
+                                interval: 1,
+                                type: 'category',
+                                data: [],
+                                z: 10,
+                                axisLine: {
+                                    show: false,
+                                    lineStyle: {
+                                        color: "#0B4A6B",
+                                        width: 1,
+                                        type: "solid"
+                                    },
+                                },
+                                axisLabel: {
+                                    interval: 0,
+                                    show: true,
+                                    color: "#0B4A6B",
+                                    margin: 8,
+                                    fontSize: 16
+                                },
+                            },
+                            radiusAxis: {
+                                min: 40,
+                                max: 120,
+                                interval: 20,
+                                axisLine: {
+                                    show: false,
+                                    lineStyle: {
+                                        color: "#0B3E5E",
+                                        width: 1,
+                                        type: "solid"
+                                    },
+                                },
+                                axisLabel: {
+                                    formatter: '{value} %',
+                                    show: false,
+                                    padding: [0, 0, 20, 0],
+                                    color: "#0B3E5E",
+                                    fontSize: 16
+                                },
+                                 splitLine: {
+                                    lineStyle: {
+                                        color: "#0B3E5E",
+                                        width: 2,
+                                        type: "solid"
+                                    }
+                                }
+                            },
+                            calculable: true,
+                            series: [{
+                                name: '总量',
+                                type: 'pie',
+                                radius: [30, 180],
+                                center: ['50%', '50%'],
+                                roseType: 'area',
+                                data: data.listValue
+                            }]
+                        };
+                        myChart1.setOption(option);
+                        window.onresize = function () {
+                            myChart1.resize();
+                        }
+                    }
+                });
+        }
+        // 时刻统计（今日和昨日）
+        function Moment() {
+            $
+                .ajax({
+                    url: basePath + '/Jqjc/Moment',
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+                        var myChart = echarts.init(document
+                            .getElementById('Moment'));
+                        var title = data.title;
+                        var YesterdayValue = data.YesterdayValue;
+                        var TodayValue = data.TodayValue;
+                        option = {
+                            title: {
+                                text: '时刻统计',
+                                left: 'left',
+                                textStyle: {
+                                    color: '#fff',
+                                     fontSize: 12
+                                }
+                            },
+                            backgroundColor: '#183b8a',
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {
+                                    lineStyle: {
+                                        color: '#57617B'
+                                    }
+                                }
+                            },
+                            // grid: {
+                            //     left: '10%',
+                            //     right: '10%',
+                            //     bottom: '30%',
+                            //     top: '20%',
+                            //     containLabel: true
+                            // },
+                            xAxis: [{
+                                type: 'category',
+                                boundaryGap: false,
+                                axisLine: {
+                                    lineStyle: {
+                                        color: '#0E2A43'
+                                    }
+                                },
+                                axisLabel: {
+                                    margin: 10,
+                                    textStyle: {
+                                        fontSize: 14,
+                                        color: '#D5CBE8'
+                                    }
+                                },
+                                axisTick: {
+                                    show: false
+                                },
+                                data: title
+                            }, {
+                                axisPointer: {
+                                    show: false
+                                },
+                                axisLine: {
+                                    lineStyle: {
+                                        color: '#0E2A43'
+                                    }
+                                },
+                                axisTick: {
+                                    show: false
+                                },
+                                position: 'bottom',
+                                offset: 20
+                            }],
+                            yAxis: [{
+                                type: 'value',
+                                axisTick: {
+                                    show: false
+                                },
+                                axisLine: {
+                                    lineStyle: {
+                                        color: '#0E2A43'
+                                    }
+                                },
+                                axisLabel: {
+                                    margin: 10,
+                                    textStyle: {
+                                        fontSize: 14,
+                                        color: '#D5CBE8'
+                                    }
+                                },
+                                splitLine: {
+                                    show: false,
+                                    lineStyle: {
+                                        color: '#57617B'
+                                    }
+                                }
+                            }],
+                            series: [
+                                {
+                                    name: '昨日',
+                                    type: 'line',
+                                    smooth: true,
+                                    stack: '总量',
+                                    symbol: 'circle',
+                                    symbolSize: 5,
+                                    showSymbol: false,
+                                    animationDelay: 2000,
+                                    animationDuration: 1000,
+                                    markPoint: {
+                                        // symbol: 'image://url',
+                                        data: [{
+                                            type: 'max',
+                                            name: '最大值'
+                                        }],
+                                        animationDelay: 3000,
+                                        animationDuration: 1000
+                                    },
+                                    lineStyle: {
+                                        normal: {
+                                            width: 1,
+                                            color: {
+                                                type: 'linear',
+                                                x: 0,
+                                                y: 0,
+                                                x2: 1,
+                                                y2: 0,
+                                                colorStops: [{
+                                                    offset: 0,
+                                                    color: 'red' // 0% 处的颜色
+                                                }, {
+                                                    offset: 1,
+                                                    color: 'grey' // 100% 处的颜色
+                                                }],
+                                                globalCoord: false
+                                                // 缺省为 false
+                                            },
+                                            opacity: 0.9
+                                        }
+                                    },
+                                    areaStyle: {
+                                        normal: {
+                                            color: new echarts.graphic.LinearGradient(
+                                                0,
+                                                0,
+                                                0,
+                                                1,
+                                                [
+                                                    {
+                                                        offset: 0,
+                                                        color: 'rgba(137, 189, 27, 0.3)'
+                                                    },
+                                                    {
+                                                        offset: 0.8,
+                                                        color: 'rgba(137, 189, 27, 0)'
+                                                    }], false),
+                                            shadowColor: 'rgba(0, 0, 0, 0.1)',
+                                            shadowBlur: 10
+                                        }
+                                    },
+                                    itemStyle: {
+                                        normal: {
+                                            color: 'rgb(137,189,27)',
+                                            borderColor: 'rgba(137,189,2,0.27)',
+                                            borderWidth: 12
+
+                                        }
+                                    },
+                                    data: YesterdayValue
+                                },
+                                {
+                                    name: '今日',
+                                    type: 'line',
+                                    smooth: true,
+                                    symbol: 'circle',
+                                    stack: '总量',
+                                    symbolSize: 5,
+                                    animationDelay: 1000,
+                                    animationDuration: 1000,
+                                    markPoint: {
+                                        data: [{
+                                            type: 'max',
+                                            name: '最大值'
+                                        }],
+                                        animationDelay: 2000,
+                                        animationDuration: 1000
+                                    },
+                                    showSymbol: false,
+                                    lineStyle: {
+                                        normal: {
+                                            width: 1,
+                                            color: {
+                                                type: 'linear',
+                                                x: 0,
+                                                y: 0,
+                                                x2: 1,
+                                                y2: 0,
+                                                colorStops: [{
+                                                    offset: 0,
+                                                    color: 'red' // 0% 处的颜色
+                                                }, {
+                                                    offset: 1,
+                                                    color: 'yellow' // 100% 处的颜色
+                                                }],
+                                                globalCoord: false
+                                                // 缺省为 false
+                                            },
+                                            opacity: 0.9
+                                        }
+                                    },
+                                    areaStyle: {
+                                        normal: {
+                                            color: new echarts.graphic.LinearGradient(
+                                                0,
+                                                0,
+                                                0,
+                                                1,
+                                                [
+                                                    {
+                                                        offset: 0,
+                                                        color: 'rgba(0, 236, 212, 0.3)'
+                                                    },
+                                                    {
+                                                        offset: 0.8,
+                                                        color: 'rgba(0, 236, 212, 0)'
+                                                    }], false),
+                                            shadowColor: 'rgba(0, 0, 0, 0.1)',
+                                            shadowBlur: 10
+                                        }
+                                    },
+                                    itemStyle: {
+                                        normal: {
+                                            color: 'rgb(0,136,212)',
+                                            borderColor: 'rgba(0,136,212,0.2)',
+                                            borderWidth: 12
+
+                                        }
+                                    },
+                                    data: TodayValue
+                                },]
+                        };
+                        myChart.setOption(option);
+                        window.onresize = function () {
+                            myChart.resize();
+                        }
+                    }
+                });
+        }
+        // Top10-地点
+        function TopTenDD() {
+            $.ajax({
+                url: basePath + '/Jqjc/TopTenDD',
+                dataType: "json",
+                type: "POST",
+                success: function (data) {
+                    var myChart = echarts.init(document
+                        .getElementById('TopTenDD'));
+                    option = {
+                        title: {
+                            text: 'Top10-地点',
+                            left: 'left',
+                            textStyle: {
+                                color: '#fff',
+                                fontSize: 12
+                            }
+                        },
+                        backgroundColor: '#1e3e8c',
+                        // grid: {
+                        //     top: '15%',
+                        //     right: '3%',
+                        //     left: '5%',
+                        //     bottom: '12%'
+                        // },
+                        xAxis: [{
+                            type: 'category',
+                            color: '#59588D',
+                            data: data.title,
+                            axisPointer: {
+                                type: 'line'
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: '#272456'
+                                }
+                            },
+                            axisLabel: {
+                                margin: 10,
+                                color: '#fff',
+                                interval: 0,
+                                rotate: 45,//倾斜度 -90 至 90 默认为0
+                                textStyle: {
+                                    fontSize: 10
+                                },
+                            },
+                        }],
+                        yAxis: [{
+                            min: 0,
+                            max: 100,
+                            axisLabel: {
+                                formatter: '{value}%',
+                                color: '#fff',
+                                 fontSize: 8
+                            },
+                            axisLine: {
+                                show: false
+                            },
+                            splitLine: {
+                                lineStyle: {
+                                    color: '#272456'
+                                }
+                            }
+                        }],
+                        series: [{
+                            type: 'bar',
+                            data: data.value,
+                            barWidth: '20px',
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1, [{
+                                            offset: 0,
+                                            color: '#41E1D4' // 0% 处的颜色
+                                        }, {
+                                            offset: 1,
+                                            color: '#10A7DB' // 100% 处的颜色
+                                        }], false),
+                                    barBorderRadius: [10, 10, 0, 0],
+                                    shadowColor: 'rgba(0,255,225,1)',
+                                    shadowBlur: 4,
+                                }
+                            },
+                            label: {
+                                normal: {
+                                    show: true,
+                                    lineHeight: 30,
+                                    width: 40,
+                                    height: 30,
+                                    backgroundColor: '#252453',
+                                    borderRadius: 200,
+                                    position: ['-8', '-60'],
+                                    distance: 1,
+                                    formatter: ['    {d|●}',
+                                        ' {a|{c}%}     \n', '    {b|}']
+                                        .join(''),
+                                    rich: {
+                                        d: {
+                                            color: '#3CDDCF',
+                                        },
+                                        a: {
+                                            color: '#fff',
+                                            align: 'center',
+                                        },
+                                        b: {
+                                            width: 1,
+                                            height: 30,
+                                            borderWidth: 1,
+                                            borderColor: '#234e6c',
+                                            align: 'left'
+                                        },
+                                    }
+                                }
+                            }
+                        }]
+                    };
+                    myChart.setOption(option);
+                    window.onresize = function () {
+                        myChart.resize();
+                    }
+
+                }
+            });
+        }
+        // Top10-分类
+       function TopTenType() {
+            $.ajax({
+                url: basePath + '/Jqjc/TopTenType',
+                dataType: "json",
+                type: "POST",
+                success: function (dataValue) {
+                    var data = dataValue.result;
+                    //有值的色图的正切处理
+                    var data3 = [];
+                    data3 = JSON.parse(JSON.stringify(data));
+                    for (var i = 0; i < data3.length; i++) {
+                        if (i === 0) {
+                            data3[i]['label']['color'] = '#333';
+                            data3[i]['itemStyle']['color'] = 'rgba(25, 255, 224)';
+                            data3[i]['emphasis']['itemStyle']['color'] = 'rgba(25, 255, 224)';
+                            data3[i]['label']['rotate'] = angleText(i, data3.length);
+                        } else {
+                            data3[i]['label']['color'] = '#fff';
+                            data3[i]['itemStyle']['color'] = '#4169E1';
+                            data3[i]['emphasis']['itemStyle']['color'] = '#6A5ACD';
+                            data3[i]['label']['rotate'] = angleText(i, data3.length);
+                        }
+                    }
+
+
+                    //最外层大圈的数据
+                    var data1 = [];
+
+                    data1 = JSON.parse(JSON.stringify(data));
+                    for (var i = 0; i < data1.length; i++) {
+                        data1[i].value = 1;
+                        data1[i]['label']['rotate'] = angleText(i, data1.length);
+                        if (i === 0) {
+                            data1[i]['label']['color'] = 'rgba(25, 255, 224)';
+                        }
+                    }
+
+                    //透明饼图的数据
+                    var data2 = [];
+
+                    for (var i = 0; i < data.length; i++) {
+                        if (i === 0) {
+                            data2.push({
+                                value: 1,
+                                itemStyle: {
+                                    color: 'rgba(25, 255, 224,0.05)',
+                                }
+                            });
+                        } else {
+                            data2.push({
+                                value: 1,
+                                itemStyle: {
+                                    color: 'transparent',
+                                }
+                            });
+                        }
+                    }
+                    var myChart = echarts.init(document
+                        .getElementById('TopTenType'));
+                    var option = {
+                        title: {
+                            text: 'Top10-类型',
+                            left: 'left',
+                            textStyle: {
+                                color: '#fff',
+                                fontSize: 12
+                            }
+                        },
+                        backgroundColor: '#183b8a',
+                        grid: {
+                        },
+                        polar: {},
+                        angleAxis: {
+                            show: false,
+                            interval: 1,
+                            type: 'category',
+                            data: [],
+
+
+                        },
+                        //中间画圈圈的坐标轴
+                        radiusAxis: {
+                            show: false
+                        },
+                        series: [{
+                            type: 'pie',
+                            radius: ["58%", "115%"],
+                            hoverAnimation: false,
+                            itemStyle: {
+                                color: 'transparent'
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false,
+                                    length: 30,
+                                    length2: 55
+                                },
+                            },
+                            label: {
+                                normal: {
+                                    position: 'inside',
+                                    align: 'right'
+                                }
+                            },
+                            name: "",
+                            data: data1
+                        }, {
+                            stack: 'a',
+                            type: 'pie',
+                            radius: ['75%', '42%'],
+                            roseType: 'area',
+                            zlevel: 10,
+                            itemStyle: {
+                                color: '#4169E1',
+                            },
+                            emphasis: {
+                                itemStyle: {
+                                    color: '#6A5ACD'
+                                }
+                            },
+                            label: {
+                                normal: {
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: 18,
+                                        color: '#fff'
+                                    },
+                                    position: 'inside',
+                                    rotate: 30,
+                                    align: 'right',
+                                    fontWeight: 'bold',
+                                    formatter: '{c}%'
+                                },
+                                emphasis: {
+                                    show: true
+                                }
+                            },
+                            animation: false,
+                            data: data3
+                        }, {
+                            type: 'pie',
+                            zlevel: 99,
+                            radius: ["15%", "90%"],
+                            selectedOffset: 0,
+                            animation: false,
+                            hoverAnimation: false,
+                            label: {
+                                normal: {
+                                    show: false,
+                                }
+                            },
+                            data: data2
+                        }]
+                    };
+                    myChart.setOption(option);
+                    window.onresize = function () {
+                        myChart.resize();
+                    }
+                    myChart.on('click', function (a) {
+                        //最外层的字体颜色重置变色
+                        for (var da1 = 0; da1 < option.series[0].data.length; da1++) {
+                            option.series[0].data[da1].label.color = '#fff';
+                        }
+
+                        //色圈的字体颜色和选中颜色重置
+                        for (var da2 = 0; da2 < option.series[1].data.length; da2++) {
+                            option.series[1].data[da2].itemStyle.color = '#4169E1';
+                            option.series[1].data[da2].label.color = '#fff';
+                            //hover颜色重置
+                            option.series[1].data[da2].emphasis.itemStyle.color = '#6A5ACD';
+
+                        }
+
+                        //背景的透明饼图的重置
+                        for (var da3 = 0; da3 < option.series[2].data.length; da3++) {
+                            option.series[2].data[da3].itemStyle.color = 'transparent';
+                        }
+
+                        option.series[1].data[a.dataIndex].itemStyle.color = 'rgba(25, 255, 224)';
+                        option.series[1].data[a.dataIndex].label.color = '#333';
+                        //hover 颜色改变
+                        option.series[1].data[a.dataIndex].emphasis.itemStyle.color = 'rgba(25, 255, 224)';
+                        option.series[0].data[a.dataIndex].label.color = 'rgba(25, 255, 224)';
+                        option.series[2].data[a.dataIndex].itemStyle.color = 'rgba(25, 255, 224,0.1)';
+                        //console.log(option)
+                        myChart.setOption(option);
+                    });
+
+                    myChart.on('mouseover', function (a) {
+                        myChart.dispatchAction({
+                            type: 'highlight',
+                            seriesIndex: 1,
+                            dataIndex: a.dataIndex
+                        });
+                    });
+
+                    myChart.on('mouseout', function (a) {
+                        myChart.dispatchAction({
+                            type: 'downplay',
+                            seriesIndex: 1,
+                            dataIndex: a.dataIndex
+                        });
+                    });
+                  
+                }
+            });
+        }
+        function angleText(i, num) {
+                //每个元素的角度
+                var everyAngle = 360 / num;
+                //文字现在所在的角度
+                var currentAngle = i * everyAngle + everyAngle / 2;
+                //文字所在模块的所占角度
+                var currentArea = (i + 1) * everyAngle;
+
+                if (currentAngle <= 90) {
+                    return -currentAngle;
+                } else if (currentAngle <= 180 && currentAngle > 90) {
+                    return 180 - currentAngle;
+                } else if (currentAngle < 270 && currentAngle > 180) {
+                    return 180 - currentAngle;
+                } else if (currentAngle < 360 && currentAngle >= 270) {
+                    return 360 - currentAngle;
+                }
+            }
+
+        // 全区实时
+        function RealTime() {
+            // console.log(idd)
+            //获取查询时间与查询内容
+            var userId = $("#userId").val();
+            var createDate = $("#time").val();
+            var status = $("#ervFonr-1 option:selected").val();
+            var documentName = $("#name").val();
+            layui.use(['table', 'layer', 'laydate', 'laypage', 'util'], function () {
+                var $ = layui.$,
+                    table = layui.table,
+                    layer = layui.layer,
+                    laydate = layui.laydate;
+                var laypage = layui.laypage;
+                var util = layui.util;
+                $.ajaxSetup({
+                    xhrFields: {
+                        withCredentials: true
+                    }
+                });
+                //自定义格式
+                laydate.render({
+                    elem: '#demo',
+                    format: 'yyyy/MM/dd',
+                    range: true,
+                    theme: '#ff7f4f',
+                    done: function (value, date, endDate) {
+                        $("#time").val(value);
+                        table.reload('demo', {
+                            url: basePath + '/Jqjc/RealTime',
+                            where: { //设定异步数据接口的额外参数，任意设
+                                limitName: '15',
+                                pageName: '1',
+                                // userId:userId,
+                                createDate: value,
+                                status: "",
+                                documentName: "",
+
+                            }
+                        });
+                    }
+                });
+
+
+
+                table.render({
+                    elem: '#demo',
+                    page: {
+                        theme: '#ff7f4f',
+
+                    },
+
+                    page: false,
+                    // limits: [5, 10, 15], //显示
+                    limit: 15,//每页默认显示的数量
+                    where: {
+
+                    } //如果无需传递额外参数，可不加该参数
+                    ,
+                    url: basePath + '/Jqjc/RealTime',
+                    cols: [
+                        [
+                            // { type: 'checkbox', width: 100, fixed: 'left', align: 'center' }
+                            , {
+                                title: '序号',
+                                align: 'center',
+                                type: 'numbers',
+                                // sort: true,
+                                width: 50,
+                                
+                            },
+                            {
+                                field: 'cJPCS',
+                                title: '派出所',
+                                width: "22%",
+                                align: 'center',
+                                // toolbar: "#barDemo"
+                                // type: 'numbers',
+                                // sort: true,
+
+                            }, {
+                                title: '派出所数量',
+                                field: 'pCSCOUNT',
+                               
+                                align: 'center'
+                            }, {
+                                field: 'jQZY',
+                                width: "22%",
+                                title: '最新案件内容',
+                                align: 'center',
+                              
+                            },
+                            // {
+                            //     field: 'cJPCS',
+                            //     width: "15%",
+                            //     title: '出警派出所',
+                            //     align: 'center',
+                            //     // template: '#titleTpl'
+                            // },
+                            // {
+                            //     field: 'counts',
+                            //     width: 200,
+                            //     title: '上传用户',
+                            //     align: 'center',
+                            //     template: '#titleTpl'
+                            // },
+                            {
+                                field: 'bJSJ',  width: "20%", title: '最新案件时间', align: 'center', templet: "<div>{{layui.util.toDateString(d.bJSJ, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                            }
+                            ,
+                            // , { field: 'status', width: 213, title: '最新案件内容', align: 'center' }
+                            // , { field: 'uploadDate', width: 170, title: '上传时间', align: 'center' }
+                            // , { width: 283, title: '操作', align: 'center', toolbar: "#barDemo" }
+
+                        ]
+                    ],
+                    done: function (res, curr, count) {
+
+                        $('th').css({
+                            'background-color': '#ed6a1a',
+                            'color': '#fff',
+                            'font-weight': 'bold'
+                        })
+                    },
+                    parseData: function (res) { //res 即为原始返回的数据
+                        //    console.log(res.data.pageList[name])
+
+                        return {
+                            "code": res.status, //解析接口状态
+                            "msg": res.message, //解析提示文本
+                            "count": res.totalCount, //解析数据长度
+                            "data": res.list //解析数据列表
+                        };
+                    },
+                    request: {
+                        pageName: 'pageNo' //页码的参数名称，默认：page
+                        ,
+                        // limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    }
+
+                });
+
+                //监听表格复选框选择
+                table.on('checkbox(demo)', function (obj) {
+                    console.log(obj);
+                });
+
+                //监听工具条
+                table.on('tool(demo)', function (obj) {
+                    var data = obj.data;
+                    console.log(data)
+                    if (obj.event === 'detail') {
+                        if (data.status == '解析失败') {
+                            layer.msg('此文件解析失败，无法查看明细', {
+                                time: 1800,
+                                icon: 2
+                            });
+                        } else {
+                            var time = obj.data.time;
+                            var uuid = obj.data.uuid
+                            console.log(time)
+                            console.log(uuid)
+                            var url = "../templates/fllow.html?time=" + time + "&uuid=" + uuid;
+
+                            window.location.href = url;
+                        }
+
+                    } else if (obj.event === 'del') {
+                        layer.confirm('确认删除？', {
+                            btn: ['确定', '取消'],
+                            btn1: function (index, layero) {
+                                //后台执行删除操作
+                                $.post(basePath + '/eye/delete', {
+                                    'docId': data.id
+                                }, function (data) {
+                                    if (data.status == 1) {
+                                        layer.msg("删除成功", {
+                                            time: 1800,
+                                            icon: 1
+                                        });
+                                        loadList();
+                                    } else {
+                                        layer.msg('删除失败', {
+                                            time: 1800,
+                                            icon: 2
+                                        });
+                                    }
+                                }, 'json');
+                                layer.close(index);
+                            },
+                            btn2: function (index, layero) {
+                                layer.close(index);
+                            }
+                        });
+                    } else if (obj.event === 'edit') {
+                        if (data.status == '已修改' || (data.status == '核查完成' && data.errorCount == '0')) {
+                            $.post('/eye/get-down', {
+                                'docId': data.id
+                            }, function (data, status) {
+                                if (data == 'false') {
+                                    layer.msg('下载失败', {
+                                        time: 1800,
+                                        icon: 2
+                                    });
+                                } else {
+                                    data = JSON.parse(data);
+                                    window.location.href = basePath + "/eye/down-file/" + data.downkey +
+                                        "/" + data.docId;
+                                }
+                            });
+                        } else {
+                            layer.msg('此文件不可以下载', {
+                                time: 1800,
+                                icon: 2
+                            });
+                        }
+                    }
+                });
+
+            });
+            // $.ajax({
+            //         url: basePath + '/Jqjc/RealTime',
+            //         dataType: "json",
+            //         type: "POST",
+            //         success: function (data) {
+            //             var table = $("<table><thead><tr><th>派出所</th><th>总量</th><th>最新案件时间</th><th>最新案件内容</th></tr></thead><tbody id=\"RealTimeTbody\"></tbody></table>");
+            //             table.appendTo("#RealTime");
+            //             for (var i in data.list) {
+            //                 var tr = $("<tr></tr>");
+            //                 tr.appendTo("#RealTimeTbody");
+            //                 var tdPCS = $("<td>" + data.list[i].cJPCS
+            //                     + "</td>");
+            //                 tdPCS.appendTo(tr);
+            //                 var tdPCSCOUNT = $("<td>"
+            //                     + data.list[i].pCSCOUNT + "</td>");
+            //                 tdPCSCOUNT.appendTo(tr);
+            //                 var date = new Date();
+            //                 date.setTime(data.list[i].bJSJ);
+            //                 var y = date.getFullYear();
+            //                 var m = date.getMonth() + 1;
+            //                 m = m < 10 ? ('0' + m) : m;
+            //                 var d = date.getDate();
+            //                 d = d < 10 ? ('0' + d) : d;
+            //                 var hour = date.getHours();
+            //                 hour = hour < 10 ? ('0' + hour) : hour;
+            //                 var min = date.getMinutes();
+            //                 min = min < 10 ? ('0' + min) : min;
+            //                 var tdBJSJ = $("<td>" + y + "-" + m + "-" + d
+            //                     + " " + hour + ":" + min + "</td>");
+            //                 tdBJSJ.appendTo(tr);
+            //                 var tdJQZY = $("<td style=\"white-space:nowrap;overflow:hidden;text-overflow: ellipsis;\">"
+            //                     + data.list[i].jQZY + "</td>");
+            //                 tdJQZY.appendTo(tr);
+            //             }
+            //         }
+            //     });
+        }
+        // 重复报案人、电话
+        function RepeatPeoplePhone() { 
+            $
+                .ajax({
+                    url: basePath + '/Jqjc/RepeatPeoplePhone',
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+                        var table = $("<table width='100%' class='tablet' ><thead><tr><th colspan=\"2\" class='chon'>重复报案人统计</th><th colspan=\"2\">数量</th></tr></thead><tbody id=\"RepeatPeopleTbody\"></tbody></table>");
+                        table.appendTo("#RepeatPeoplePhone");
+                        var table = $("<table  width='100%' class='tablet' ><thead><tr><th colspan=\"2\" class='chon'>重复报案电话统计</th><th colspan=\"2\">数量</th></tr></thead><tbody id=\"RepeatPhoneTbody\"></tbody></table>");
+                        table.appendTo("#RepeatPeoplePhone");
+                        for (var i in data.People) {
+                            var tr = $("<tr class='alter'></tr>");
+                            tr.appendTo("#RepeatPeopleTbody");
+                            var tdBJRXM = $("<td>" + data.People[i].bJRXM
+                                + "</td>");
+                            tdBJRXM.appendTo(tr);
+                            var tdBJRCOUNT = $("<td>"
+                                + data.People[i].bJRCOUNT + "</td>");
+                            tdBJRCOUNT.appendTo(tr);
+                        }
+
+                        for (var i in data.Phone) {
+                            var tr = $("<tr class='alter'></tr>");
+                            tr.appendTo("#RepeatPhoneTbody");
+                            var tdBJRXM = $("<td>" + data.Phone[i].bJDH
+                                + "</td>");
+                            tdBJRXM.appendTo(tr);
+                            var tdBJRCOUNT = $("<td>"
+                                + data.Phone[i].bJDHCOUNT + "</td>");
+                            tdBJRCOUNT.appendTo(tr);
+                        }
+                    }
+                });
+        }
+        //词云
+        function WordCloud() {
+            var i = 0;
+            var oTag = null;
+            $.ajax({
+                url: basePath + '/Jqjc/WordCloud',
+                dataType: "json",
+                type: "POST",
+                success: function (data) {
+                    var items = [];
+                    $.each(data, function (key, val) {
+                        items.push("<a href=#  style=font-size:" + val + "px>"
+                            + key + "</a>");
+                    });
+                    $("<div/>", {
+                        "id": "div1",
+                        // style: "border:solid 2px black",
+                        ALIGN: "center",
+                        html: items.join("")
+                    }).appendTo($('#WordCloud'));
+                    // console.log($('div'));
+
+                    oDiv = document.getElementById('div1');
+                    aA = oDiv.getElementsByTagName('a');
+
+                    for (i = 0; i < aA.length; i++) {
+                        oTag = {};
+                        oTag.offsetWidth = aA[i].offsetWidth;
+                        oTag.offsetHeight = aA[i].offsetHeight;
+                        mcList.push(oTag);
+                    }
+
+                    sineCosine(0, 0, 0);
+
+                    positionAll();
+
+                    oDiv.οnmοuseοver = function () {
+                        active = true;
+                    };
+
+                    oDiv.οnmοuseοut = function () {
+                        active = false;
+                    };
+
+                    oDiv.οnmοusemοve = function (ev) {
+                        var oEvent = window.event || ev;
+
+                        mouseX = oEvent.clientX
+                            - (oDiv.offsetLeft + oDiv.offsetWidth / 1);
+                        mouseY = oEvent.clientY
+                            - (oDiv.offsetTop + oDiv.offsetHeight / 1);
+
+                        mouseX /= 3;
+                        mouseY /= 3;
+                    };
+
+                    setInterval(update, 30);
+                }
+            });
+
+        };
+
+        function unique(arr, attribute) {
+            var new_arr = [];
+            var json_arr = [];
+            for (var i = 0; i < arr.length; i++) {
+                console.log(new_arr.indexOf(arr[i][attribute]));
+                if (new_arr.indexOf(arr[i][attribute]) == -1) { //  -1代表没有找到
+                    new_arr.push(arr[i][attribute]); //如果没有找到就把这个name放到arr里面，以便下次循环时用
+                    json_arr.push(arr[i]);
+                } else {
+                }
+            }
+            return json_arr;
+        }
+
+    </script>
+</body>
+
+</html>
